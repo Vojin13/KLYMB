@@ -74,18 +74,27 @@
 
                     <div class="lg:col-span-3">
 
-                        <div class="mb-6 flex items-center justify-between border-b border-gray-200 pb-6">
-                            <p class="text-sm font-medium text-gray-500 italic">Showing 1-12 of 48 products</p>
+                        <div class="mb-8 flex flex-col md:flex-row items-center gap-4 border-b border-gray-200 pb-6">
 
-                            <div class="flex items-center gap-4">
-                                <select class="rounded-lg border-gray-300 py-2 pl-3 pr-10 text-sm focus:border-red-500 focus:ring-red-500 font-bold uppercase">
-                                    <option>Sort by: Newest</option>
+                            <div class="relative w-full">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
+                                </div>
+                                <input type="text"
+                                       placeholder="Search for gear..."
+                                       class="w-full bg-white border border-gray-300 rounded-lg p-2.5 pl-10 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none font-bold tracking-tight transition-all">
+                            </div>
+
+                            <div class="flex items-center gap-3 w-full md:w-auto shrink-0">
+                                <select class="w-full md:w-auto rounded-lg border-gray-300 py-2.5 pl-3 pr-10 text-sm focus:border-red-500 focus:ring-red-500 font-bold uppercase cursor-pointer">
+                                    <option>Newest</option>
                                     <option>Price: Low to High</option>
                                     <option>Price: High to Low</option>
-                                    <option>Best Selling</option>
                                 </select>
 
-                                <button type="button" class="inline-flex items-center rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 lg:hidden">
+                                <button type="button" class="inline-flex items-center rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-bold uppercase text-gray-900 hover:bg-gray-100 lg:hidden shrink-0">
                                     <svg class="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd"></path></svg>
                                     Filters
                                 </button>

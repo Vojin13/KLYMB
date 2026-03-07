@@ -35,7 +35,7 @@
 
                     <div>
                         <h3 class="text-red-600 text-xs font-black uppercase tracking-[0.3em] mb-6 italic">// Connectivity</h3>
-                        <a href="mailto:hello@klymb.com" class="block text-xl font-bold text-black hover:text-red-600 transition-colors">hello@klymb.com</a>
+                        <a href="mailto:hello@klymb.com" class="block text-xl font-bold text-black hover:text-red-600 transition-colors">support@klymb.com</a>
                         <a href="tel:+381601234567" class="block text-xl font-bold text-black mt-2">+381 60 123 4567</a>
                     </div>
 
@@ -84,7 +84,7 @@
 
                         <div class="md:col-span-2">
                             <button type="submit"
-                                    class="w-full bg-black text-white font-black uppercase tracking-widest py-4 text-sm hover:bg-red-600 transition-all duration-300">
+                                    class="cursor-pointer w-full bg-black text-white font-black uppercase tracking-widest py-4 text-sm hover:bg-red-600 transition-all duration-300">
                                 Send Message
                             </button>
                         </div>
