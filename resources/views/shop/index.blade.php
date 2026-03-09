@@ -83,7 +83,7 @@
                                     </svg>
                                 </div>
                                 <input type="text"
-                                       placeholder="Search for gear..."
+                                       placeholder="SEARCH FOR GEAR..."
                                        class="w-full bg-white border border-gray-300 rounded-lg p-2.5 pl-10 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none font-bold tracking-tight transition-all">
                             </div>
 
