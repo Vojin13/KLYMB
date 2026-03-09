@@ -14,42 +14,55 @@
                 <p class="text-gray-500 font-bold mt-4 uppercase tracking-widest text-sm">// Register your account to access the facility</p>
             </div>
 
-            <form action="{{ route('register') }}" method="POST" class="space-y-6">
+            <form action="{{ route('auth.register') }}" method="POST" class="space-y-6">
                 @csrf
+
+                @if ($errors->any())
+                    <div class="p-4 bg-red-50 border-2 border-red-600">
+                        <ul class="text-red-600 text-xs font-black uppercase tracking-widest">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
                 <div class="grid grid-cols-2 gap-6">
                     <div>
                         <label class="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">First Name</label>
-                        <input type="text" name="first_name" class="w-full border-2 border-black p-4 focus:border-red-600 outline-none  font-bold" required>
+                        <input type="text" name="first_name" value="{{ old('first_name') }}" class="w-full border-2 border-black p-4 focus:border-red-600 outline-none font-bold" required>
                     </div>
                     <div>
                         <label class="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Last Name</label>
-                        <input type="text" name="last_name" class="w-full border-2 border-black p-4 focus:border-red-600 outline-none  font-bold" required>
+                        <input type="text" name="last_name" value="{{ old('last_name') }}" class="w-full border-2 border-black p-4 focus:border-red-600 outline-none font-bold" required>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-black tracking-widest mb-2 uppercase text-gray-400">Username</label>
+                        <input type="text" name="username" value="{{ old('username') }}" class="w-full border-2 border-black p-4 focus:border-red-600 outline-none font-bold" required>
+                    </div>
                     <div>
                         <label class="block text-xs font-black tracking-widest mb-2 uppercase text-gray-400">Email</label>
-                        <input type="email" name="email" class="w-full border-2 border-black p-4 focus:border-red-600 outline-none  font-bold" required>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-black tracking-widest mb-2 uppercase text-gray-400">Date of Birth</label>
-                        <input type="date" name="date"
-                               class="w-full border-2 border-black p-4 focus:border-red-600 outline-none  font-bold text-gray-900 bg-white"
-                               required>
+                        <input type="email" name="email" value="{{ old('email') }}" class="w-full border-2 border-black p-4 focus:border-red-600 outline-none font-bold" required>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-xs font-black tracking-widest uppercase mb-2 text-gray-400">Password</label>
-                        <input type="password" name="password" class="w-full border-2 border-black p-4 focus:border-red-600 outline-none  font-bold" required>
+                        <label class="block text-xs font-black tracking-widest mb-2 uppercase text-gray-400">Date of Birth</label>
+                        <input type="date" name="date_of_birth" value="{{ old('date_of_birth') }}" class="w-full border-2 border-black p-4 focus:border-red-600 outline-none font-bold text-gray-900 bg-white" required>
                     </div>
                     <div>
-                        <label class="block text-xs font-black tracking-widest uppercase mb-2 text-gray-400">Confirm</label>
-                        <input type="password" name="password_confirmation" class="w-full border-2 border-black p-4 focus:border-red-600 outline-none  font-bold" required>
+                        <label class="block text-xs font-black tracking-widest uppercase mb-2 text-gray-400">Password</label>
+                        <input type="password" name="password" class="w-full border-2 border-black p-4 focus:border-red-600 outline-none font-bold" required>
                     </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-black tracking-widest uppercase mb-2 text-gray-400">Confirm Password</label>
+                    <input type="password" name="password_confirmation" class="w-full border-2 border-black p-4 focus:border-red-600 outline-none font-bold" required>
                 </div>
 
                 <button type="submit" class="w-full py-6 bg-black text-white font-black tracking-widest hover:bg-red-600 transition-all text-xl cursor-pointer">

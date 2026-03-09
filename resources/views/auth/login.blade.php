@@ -23,7 +23,7 @@
                 <h2 class="text-4xl font-black uppercase tracking-tighter mb-2">Welcome Back</h2>
                 <p class="text-gray-500 mb-8 uppercase font-bold tracking-widest text-xs">// Enter your credentials to access your dashboard</p>
 
-                <form action="{{ route('login') }}" method="POST" class="space-y-6">
+                <form action="{{ route('auth.login') }}" method="POST" class="space-y-6">
                     @csrf
 
                     @if ($errors->any())
@@ -50,7 +50,7 @@
                 </form>
 
                 <div class="mt-8 text-center text-xs font-black uppercase tracking-widest text-gray-400">
-                    Don't have an account? <a href="{{ route('register') }}" class="text-red-600 hover:underline">Join the tribe</a>
+                    Don't have an account? <a href="{{ route('show.register') }}" class="text-red-600 hover:underline">Join the tribe</a>
                 </div>
             </div>
         </div>
