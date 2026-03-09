@@ -25,9 +25,20 @@
 
                 <form action="{{ route('login') }}" method="POST" class="space-y-6">
                     @csrf
+
+                    @if ($errors->any())
+                        <div class="p-4 bg-red-50 border-2 border-red-600">
+                            <ul class="text-red-600 text-xs font-black uppercase tracking-widest">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <div>
                         <label class="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Email</label>
-                        <input type="email" name="email" class="w-full border-2 border-gray-200 p-4 focus:border-red-600 outline-none font-bold transition-all" required>
+                        <input type="email" name="email" value="{{ old('email') }}" class="w-full border-2 border-gray-200 p-4 focus:border-red-600 outline-none font-bold transition-all" required>
                     </div>
                     <div>
                         <label class="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Password</label>
