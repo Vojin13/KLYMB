@@ -39,6 +39,10 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
+    public function contactMessages() {
+        return $this->hasMany(ContactMessage::class);
+    }
+
     protected function casts(): array
     {
         return [

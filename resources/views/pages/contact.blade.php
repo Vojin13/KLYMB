@@ -55,31 +55,52 @@
                 <div class="md:col-span-8 bg-gray-50 p-8 md:p-12 relative">
                     <div class="absolute top-0 right-0 w-16 h-16 border-t-4 border-r-4 border-black"></div>
 
-                    <form action="" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-black uppercase tracking-widest text-gray-900">Send us a message</h2>
+                        <div class="w-12 h-1 bg-black mt-2"></div>
+                    </div>
+
+                    @if ($errors->any())
+                        <div class="mb-8 p-4 bg-red-50 border-2 border-red-600">
+                            <ul class="text-red-600 text-xs font-black uppercase tracking-widest list-disc list-inside">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    @if (session('success'))
+                        <div class="mb-8 p-4 bg-green-50 border-2 border-green-600">
+                            <p class="text-green-600 text-xs font-black uppercase tracking-widest">
+                                {{ session('success') }}
+                            </p>
+                        </div>
+                    @endif
+
+                    <form action="{{ route('contact.submit') }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
                         @csrf
 
                         <div class="space-y-2">
-                            <label for="name" class="block text-sm font-black uppercase tracking-widest text-gray-900">
-                                Name
-                            </label>
-                            <input type="text" name="name" id="name" value="{{ old('name') }}" required
-                                   class="w-full bg-white border border-gray-300 p-3 text-base font-medium focus:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all">
+                            <label for="name" class="block text-sm font-black uppercase tracking-widest text-gray-900">Name</label>
+                            <input type="text" name="name" id="name"
+                                   value="{{ auth()->check() ? auth()->user()->username : old('name') }}"
+                                   {{ auth()->check() ? 'readonly' : 'required' }}
+                                   class="w-full border p-3 text-base font-medium transition-all {{ auth()->check() ? 'bg-gray-100 border-gray-200 text-gray-500 cursor-not-allowed' : 'bg-white border-gray-300 focus:border-black focus:outline-none focus:ring-1 focus:ring-black' }}">
                         </div>
 
                         <div class="space-y-2">
-                            <label for="email" class="block text-sm font-black uppercase tracking-widest text-gray-900">
-                                Email
-                            </label>
-                            <input type="email" name="email" id="email" value="{{ old('email') }}" required
-                                   class="w-full bg-white border border-gray-300 p-3 text-base font-medium focus:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all">
+                            <label for="email" class="block text-sm font-black uppercase tracking-widest text-gray-900">Email</label>
+                            <input type="email" name="email" id="email"
+                                   value="{{ auth()->check() ? auth()->user()->email : old('email') }}"
+                                   {{ auth()->check() ? 'readonly' : 'required' }}
+                                   class="w-full border p-3 text-base font-medium transition-all {{ auth()->check() ? 'bg-gray-100 border-gray-200 text-gray-500 cursor-not-allowed' : 'bg-white border-gray-300 focus:border-black focus:outline-none focus:ring-1 focus:ring-black' }}">
                         </div>
 
                         <div class="space-y-2 md:col-span-2">
-                            <label for="message" class="block text-sm font-black uppercase tracking-widest text-gray-900">
-                                Message
-                            </label>
-                            <textarea value="{{ old('message') }}" name="message" id="message" rows="4" required
-                                      class="w-full bg-white border border-gray-300 p-3 text-base font-medium focus:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all resize-none"></textarea>
+                            <label for="message" class="block text-sm font-black uppercase tracking-widest text-gray-900">Message</label>
+                            <textarea name="message" id="message" rows="4" required
+                                      class="w-full bg-white border border-gray-300 p-3 text-base font-medium focus:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all resize-none">{{ old('message') }}</textarea>
                         </div>
 
                         <div class="md:col-span-2">
@@ -89,15 +110,6 @@
                             </button>
                         </div>
                     </form>
-                    @if ($errors->any())
-                        <div class="mt-2 p-4 bg-red-50 border-2 border-red-600">
-                            <ul class="text-red-600 text-xs font-black uppercase tracking-widest">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
                 </div>
             </div>
         </div>
