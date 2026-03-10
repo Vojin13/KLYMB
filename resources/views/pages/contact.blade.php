@@ -62,24 +62,24 @@
                             <label for="name" class="block text-sm font-black uppercase tracking-widest text-gray-900">
                                 Name
                             </label>
-                            <input type="text" name="name" id="name" required
-                                   class="w-full bg-white border border-gray-300 p-3 text-base font-medium focus:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all uppercase">
+                            <input type="text" name="name" id="name" value="{{ old('name') }}" required
+                                   class="w-full bg-white border border-gray-300 p-3 text-base font-medium focus:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all">
                         </div>
 
                         <div class="space-y-2">
                             <label for="email" class="block text-sm font-black uppercase tracking-widest text-gray-900">
                                 Email
                             </label>
-                            <input type="email" name="email" id="email" required
-                                   class="w-full bg-white border border-gray-300 p-3 text-base font-medium focus:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all uppercase">
+                            <input type="email" name="email" id="email" value="{{ old('email') }}" required
+                                   class="w-full bg-white border border-gray-300 p-3 text-base font-medium focus:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all">
                         </div>
 
                         <div class="space-y-2 md:col-span-2">
                             <label for="message" class="block text-sm font-black uppercase tracking-widest text-gray-900">
                                 Message
                             </label>
-                            <textarea name="message" id="message" rows="4" required
-                                      class="w-full bg-white border border-gray-300 p-3 text-base font-medium focus:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all uppercase resize-none"></textarea>
+                            <textarea value="{{ old('message') }}" name="message" id="message" rows="4" required
+                                      class="w-full bg-white border border-gray-300 p-3 text-base font-medium focus:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all resize-none"></textarea>
                         </div>
 
                         <div class="md:col-span-2">
@@ -89,6 +89,15 @@
                             </button>
                         </div>
                     </form>
+                    @if ($errors->any())
+                        <div class="mt-2 p-4 bg-red-50 border-2 border-red-600">
+                            <ul class="text-red-600 text-xs font-black uppercase tracking-widest">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

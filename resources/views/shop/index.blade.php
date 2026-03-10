@@ -60,13 +60,13 @@
                             <div>
                                 <h3 class="text-sm font-bold uppercase tracking-wider text-black mb-4">Price Range</h3>
                                 <div class="flex items-center gap-2">
-                                    <input type="number" placeholder="Min" class="w-full rounded-lg border border-gray-300 p-2 text-sm focus:border-red-500 focus:ring-red-500">
+                                    <input type="number" id="price-min" name="price-min" placeholder="Min" class="w-full rounded-lg border border-gray-300 p-2 text-sm focus:border-red-500 focus:ring-red-500">
                                     <span class="text-gray-400">-</span>
-                                    <input type="number" placeholder="Max" class="w-full rounded-lg border border-gray-300 p-2 text-sm focus:border-red-500 focus:ring-red-500">
+                                    <input type="number" name="price-max" id="price-max" placeholder="Max" class="w-full rounded-lg border border-gray-300 p-2 text-sm focus:border-red-500 focus:ring-red-500">
                                 </div>
                             </div>
 
-                            <button class="w-full rounded-lg bg-[#1A252F] py-3 text-sm font-bold uppercase text-white hover:bg-black transition">
+                            <button class="w-full rounded-lg bg-[#1A252F] py-3 text-sm font-bold uppercase text-white hover:bg-black transition cursor-pointer">
                                 Apply Filters
                             </button>
                         </div>
@@ -89,9 +89,13 @@
 
                             <div class="flex items-center gap-3 w-full md:w-auto shrink-0">
                                 <select class="w-full md:w-auto rounded-lg border-gray-300 py-2.5 pl-3 pr-10 text-sm focus:border-red-500 focus:ring-red-500 font-bold uppercase cursor-pointer">
-                                    <option>Newest</option>
-                                    <option>Price: Low to High</option>
-                                    <option>Price: High to Low</option>
+                                    <option value="newest">Newest</option>
+                                    <option value="low-to-high">Price: Low to High</option>
+                                    <option value="high-to-low">Price: High to Low</option>
+                                    <option value="name-asc">Name: Ascending</option>
+                                    <option value="name-desc">Name: Descending</option>
+                                    <option value="brand-asc">Brand: Ascending</option>
+                                    <option value="brand-desc">Brand: Descending</option>
                                 </select>
 
                                 <button type="button" class="inline-flex items-center rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-bold uppercase text-gray-900 hover:bg-gray-100 lg:hidden shrink-0">
