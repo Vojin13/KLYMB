@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\ContactMessage;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,7 +21,22 @@ class ContactMessageFactory extends Factory
         return [
             'message' => $this->faker->realText(1000),
             'user_id' => $this->faker->optional(0.6)->numberBetween(1, User::count()),
-            'is_answered' => $this->faker->boolean(40)
+            'is_answered' => $this->faker->boolean(40),
+            'email' => null,
         ];
+    }
+
+    public function configure(): static
+    {
+        return $this->afterMaking(function (ContactMessage $message) {
+            // Ako je user_id generisan, uzmi email od tog korisnika
+            if ($message->user_id) {
+                $user = User::find($message->user_id);
+                $message->email = $user ? $user->email : $this->faker->safeEmail();
+            } else {
+                // Ako je gost, generiši random email
+                $message->email = $this->faker->safeEmail();
+            }
+        });
     }
 }

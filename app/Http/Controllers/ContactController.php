@@ -15,6 +15,7 @@ class ContactController extends Controller
     public function submit(ContactRequest $request) {
         $data = $request->validated();
         $data['user_id'] = auth()->check() ? auth()->user()->id : null;
+        $data['email'] = auth()->check() ? null : $data['email'];
 
         ContactMessage::create($data);
 
