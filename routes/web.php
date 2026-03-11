@@ -25,9 +25,12 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/register', [AuthController::class, 'showRegister'])->name('show.register')->middleware('guest');
 });
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
-    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
-    Route::get('/admin/messages', [ContactMessageController::class, 'index'])->name('admin.messages');
-});
+
+    Route::group(['middleware' => 'auth'], function () {
+        Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
+        Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+        Route::get('/admin/messages', [ContactMessageController::class, 'index'])->name('admin.messages');
+
+        Route::resource('admin/users', UserController::class)->names('admin.users');
+    });

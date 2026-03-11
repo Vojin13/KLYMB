@@ -27,7 +27,7 @@
 
                 @auth
                     @if(auth()->user()->role->name == 'admin')
-                        <a href="{{ route('admin.users') }}" class="font-semibold relative block py-2 px-3 text-gray-900 rounded md:bg-transparent md:p-0 uppercase group transition-colors hover:text-black">
+                        <a href="{{ route('admin.users.index') }}" class="font-semibold relative block py-2 px-3 text-gray-900 rounded md:bg-transparent md:p-0 uppercase group transition-colors hover:text-black">
                             Admin Panel
                             <span class="absolute bottom-[-8px] left-1/2 w-0 h-[3px] bg-red-600 transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
                         </a>

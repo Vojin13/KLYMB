@@ -2,12 +2,17 @@
 
 @section('content')
     <div class="space-y-8">
+        @if(session('message'))
+            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 border border-green-200">
+                {{ session('message') }}
+            </div>
+        @endif
         <div class="flex justify-between items-center">
             <div>
                 <h1 class="text-3xl font-black uppercase tracking-tighter text-gray-900">User Management</h1>
                 <p class="text-gray-500 font-bold uppercase tracking-widest text-xs mt-1">Manage platform users</p>
             </div>
-            <a href="#" class="bg-black text-white px-6 py-3 font-black uppercase tracking-widest hover:bg-red-600 transition text-xs">
+            <a href="{{ route('admin.users.create') }}" class="bg-black text-white px-6 py-3 font-black uppercase tracking-widest hover:bg-red-600 transition text-xs">
                 + Add New User
             </a>
         </div>
@@ -54,8 +59,11 @@
                         </td>
                         <td class="p-6 text-gray-600">{{ $u->created_at->format('d. M. Y. H:i:s') }}</td>
                         <td class="p-6 text-right space-x-4">
-                            <button class="text-blue-600 font-bold hover:text-blue-800 transition cursor-pointer">Edit</button>
-                            <form action="" method="POST" class="inline">
+                            <a href="{{ route('admin.users.edit', $u) }}"
+                               class="text-blue-600 font-bold hover:text-blue-800 transition cursor-pointer">
+                                Edit
+                            </a>
+                            <form action="{{ route('admin.users.destroy', $u) }}" method="POST" class="inline">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="text-red-600 font-bold hover:text-red-800 transition cursor-pointer">Delete</button>
                             </form>

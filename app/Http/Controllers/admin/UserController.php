@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -15,7 +17,7 @@ class UserController extends Controller
     {
         $users = User::paginate(15);
 
-        return view('admin.manageUsers', ['users' => $users]);
+        return view('admin.users.index', ['users' => $users]);
     }
 
     /**
@@ -23,15 +25,25 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::all();
+
+        return view('admin.users.create' , ['roles' => $roles]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        if($request->has('email_verified')){
+            $data['email_verified_at'] = now();
+        }
+
+        User::create($data);
+
+        return redirect()->route('admin.users.index', ['message','User created successfully!']);
     }
 
     /**
@@ -45,9 +57,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        $roles = Role::all();
+        return view('admin.users.edit', ['user' => $user, 'roles' => $roles]);
     }
 
     /**
@@ -61,8 +74,11 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $userInfo = 'ID: '.$user->id. ' | Username: '. $user->username. ' | Email: ' . $user->email;
+        $user->delete();
+
+        return back()->with('message', 'User: '. $userInfo .' has been deleted');
     }
 }
