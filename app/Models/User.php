@@ -43,12 +43,17 @@ class User extends Authenticatable
         return $this->hasMany(ContactMessage::class);
     }
 
-    protected function casts(): array
-    {
-        return [
+    public function avatars() {
+        return $this->hasMany(UserAvatar::class);
+    }
+
+    public function getActiveAvatarAttribute() {
+        return $this->avatars()->where('is_active', true)->first();
+    }
+
+    protected $casts = [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'is_active' => 'boolean'
-        ];
-    }
+    ];
 }
