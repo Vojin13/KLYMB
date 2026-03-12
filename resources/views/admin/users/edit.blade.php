@@ -19,7 +19,7 @@
                     <a href="{{ route('admin.users.index') }}" class="text-gray-500 font-bold uppercase tracking-widest text-xs hover:text-black transition py-3">
                         Cancel
                     </a>
-                    <button type="submit" class="bg-black text-white px-8 py-3 font-black uppercase tracking-widest hover:bg-red-600 transition text-xs">
+                    <button type="submit" class="cursor-pointer bg-black text-white px-8 py-3 font-black uppercase tracking-widest hover:bg-red-600 transition text-xs">
                         Save Changes
                     </button>
                 </div>

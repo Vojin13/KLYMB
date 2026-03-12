@@ -58,15 +58,43 @@
                             {{ $u->is_active ? '✅' : '❌' }}
                         </td>
                         <td class="p-6 text-gray-600">{{ $u->created_at->format('d. M. Y. H:i:s') }}</td>
-                        <td class="p-6 text-right space-x-4">
-                            <a href="{{ route('admin.users.edit', $u) }}"
-                               class="text-blue-600 font-bold hover:text-blue-800 transition cursor-pointer">
-                                Edit
-                            </a>
-                            <form action="{{ route('admin.users.destroy', $u) }}" method="POST" class="inline">
-                                @csrf @method('DELETE')
-                                <button type="submit" class="text-red-600 font-bold hover:text-red-800 transition cursor-pointer">Delete</button>
-                            </form>
+                        <td class="p-6 text-right">
+                            <button id="dropdownDefaultButton-{{ $u->id }}"
+                                    data-dropdown-toggle="dropdown-{{ $u->id }}"
+                                    class="inline-flex items-center text-base text-red-500 transition hover:text-red-600 cursor-pointer"
+                                    type="button">
+                                Take Action
+                                <svg class="ml-2 h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+
+                            <div id="dropdown-{{ $u->id }}"
+                                 class="z-50 hidden w-40 border border-gray-200 bg-white text-left shadow-xl">
+                                <ul class="text-base text-gray-600">
+                                    <li>
+                                        <a href="{{ route('admin.users.edit', $u) }}" class="block px-4 py-2 text-blue-500 hover:bg-gray-50 hover:text-blue-600">Edit</a>
+                                    </li>
+                                    <li>
+                                        @if($u->is_active)
+                                            <a href="#" class="block px-4 py-2 text-yellow-600 hover:bg-gray-50 hover:text-yellow-700">Ban</a>
+                                        @else
+                                            <a href="#" class="block px-4 py-2 text-yellow-600 hover:bg-gray-50 hover:text-yellow-700">Unban</a>
+                                        @endif
+
+                                    </li>
+                                    <li class="border-t border-gray-100">
+                                        <form action="{{ route('admin.users.destroy', $u) }}" method="POST">
+                                            @csrf @method('DELETE')
+                                            <button type="submit"
+                                                    onclick="return confirm('Are you sure?')"
+                                                    class="block w-full px-4 py-2 text-red-500 cursor-pointer text-left hover:bg-red-50 hover:text-red-600">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
                         </td>
                     </tr>
 

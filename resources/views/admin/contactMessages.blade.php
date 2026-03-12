@@ -44,12 +44,34 @@
                                 {{ $m->is_answered ? '✅' : '❌' }}
                             </td>
                             <td class="p-6 text-gray-600 text-sm">{{ $m->created_at->format('d. M. Y. H:i:s') }}</td>
-                            <td class="p-6 text-right space-x-4">
-                                <a href="" class="text-blue-600 font-bold hover:text-blue-800 transition cursor-pointer">Read</a>
-                                <form action="" method="POST" class="inline">
-                                    @csrf @method('DELETE')
-                                    <button type="submit" class="text-red-600 font-bold hover:text-red-800 transition cursor-pointer">Delete</button>
-                                </form>
+                            <td class="p-6 text-right">
+                                <button id="dropdownDefaultButton-{{ $m->id }}"
+                                        data-dropdown-toggle="dropdown-{{ $m->id }}"
+                                        class="inline-flex items-center text-base text-red-600 hover:text-red-700 transition"
+                                        type="button">
+                                    Take Action
+                                    <svg class="w-3 h-3 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+
+                                <div id="dropdown-{{ $m->id }}"
+                                     class="z-50 hidden bg-white border border-gray-200 shadow-xl w-40 text-left">
+                                    <ul class="text-base">
+                                        <li>
+                                            <a href="#" class="block px-4 py-2 text-blue-500 hover:bg-gray-50 hover:text-blue-600">Read</a>
+                                        </li>
+                                        <li>
+                                            <form action="" method="POST">
+                                                @csrf @method('DELETE')
+                                                <button type="submit"
+                                                        class="block w-full cursor-pointer text-red-500 text-left px-4 py-2 hover:bg-red-50 hover:text-red-600">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

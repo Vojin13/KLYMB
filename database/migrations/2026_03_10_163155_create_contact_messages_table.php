@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('email')->nullable();
             $table->text('message');
+            $table->text('answer')->nullable();
             $table->boolean('is_answered')->default(false);
             $table->timestamps();
             $table->foreignId('user_id')->nullable()->constrained('users');

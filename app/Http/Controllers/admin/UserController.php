@@ -4,9 +4,11 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -37,13 +39,15 @@ class UserController extends Controller
     {
         $data = $request->validated();
 
+        $data['is_active'] = $request->has('is_active');
+
         if($request->has('email_verified')){
             $data['email_verified_at'] = now();
         }
 
         User::create($data);
 
-        return redirect()->route('admin.users.index', ['message','User created successfully!']);
+        return redirect()->route('admin.users.index')->with('message', 'User ' .$data['username']. ' created successfully.');
     }
 
     /**
@@ -66,9 +70,30 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $data = $request->validated();
+
+        $data['is_active'] = $request->has('is_active');
+
+        if($request->has('email_verified')){
+            $data['email_verified_at'] = now();
+        }
+        else {
+            $data['email_verified_at'] = null;
+        }
+
+        if(!empty($request->has('password'))){
+            $data['password'] = Hash::make($data['password']);
+        }
+        else {
+            unset($data['password']);
+        }
+
+        $user->update($data);
+        $user->save();
+
+        return redirect()->route('admin.users.index')->with('message','User updated successfully!');
     }
 
     /**
@@ -79,6 +104,6 @@ class UserController extends Controller
         $userInfo = 'ID: '.$user->id. ' | Username: '. $user->username. ' | Email: ' . $user->email;
         $user->delete();
 
-        return back()->with('message', 'User: '. $userInfo .' has been deleted');
+        return redirect()->route('admin.users.index')->with('message','User: '. $userInfo .' deleted successfully!');
     }
 }
