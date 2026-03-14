@@ -13,9 +13,12 @@ class ContactMessageController extends Controller
      */
     public function index()
     {
-        $contactMessages = ContactMessage::orderBy('is_answered', 'asc')->orderBy('created_at','desc')->paginate(15);
+        $contactMessages = ContactMessage::query()
+            ->orderBy('is_answered')
+            ->orderBy('updated_at', 'desc')
+            ->paginate(15);
 
-        return view('admin.contactMessages', ['messages' => $contactMessages]);
+        return view('admin.contactMessages.index', ['messages' => $contactMessages]);
     }
 
     /**
@@ -39,7 +42,13 @@ class ContactMessageController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $cm = ContactMessage::find($id);
+
+        if (!$cm) {
+            abort(404, "Contact message not found");
+        }
+
+        return view('admin.contactMessages.show', ['message' => $cm]);
     }
 
     /**
@@ -55,14 +64,44 @@ class ContactMessageController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validate([
+            'answer' => 'required|string|min:5',
+        ]);
+
+        $cm = ContactMessage::find($id);
+
+        if(!$cm){
+            abort(404,"Contact message not found");
+        }
+
+        if($cm->is_answered){
+            return redirect()->route('admin.messages.index')->with('error', 'This message has already been answered.');
+        }
+
+        $email = $cm->user?->email ?? $cm->email;
+        $info = 'ID: '. $cm->id . ' | From: ' . $email;
+
+        $cm->answer = $data['answer'];
+        $cm->is_answered = true;
+        $cm->save();
+
+        return redirect()->route('admin.messages.index')->with('message', 'Message '. $info .' updated successfully');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $cm = ContactMessage::find($id);
+
+        if (!$cm) {
+            abort(404, "Contact message not found");
+        }
+
+        $info = 'ID: '. $cm->id . ' | From: ' . $cm->email;
+        $cm->delete();
+        return redirect()->route('admin.messages.index')->with('message', 'Message: ' .$info . ' deleted successfully!');
     }
 }

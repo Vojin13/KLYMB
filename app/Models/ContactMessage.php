@@ -13,6 +13,7 @@ class ContactMessage extends Model
         'message',
         'email',
         'is_answered',
+        'answer',
         'created_at'
     ];
 

@@ -30,7 +30,8 @@ Route::group(['middleware' => 'guest'], function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
         Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-        Route::get('/admin/messages', [ContactMessageController::class, 'index'])->name('admin.messages');
 
         Route::resource('admin/users', UserController::class)->names('admin.users');
+
+        Route::resource('admin/messages', ContactMessageController::class)->only(['index', 'destroy', 'show', 'update'])->names('admin.messages');
     });

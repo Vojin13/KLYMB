@@ -9,6 +9,18 @@
             </div>
         </div>
 
+        @if(session('message'))
+            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 border border-green-200">
+                {{ session('message') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 border border-red-200">
+                {{ session('error') }}
+            </div>
+        @endif
+
         <div class="flex justify-start mb-4">
             <p class="text-gray-500 font-bold text-sm uppercase tracking-widest">
                 Showing
@@ -47,7 +59,7 @@
                             <td class="p-6 text-right">
                                 <button id="dropdownDefaultButton-{{ $m->id }}"
                                         data-dropdown-toggle="dropdown-{{ $m->id }}"
-                                        class="inline-flex items-center text-base text-red-600 hover:text-red-700 transition"
+                                        class="inline-flex items-center text-base text-red-600 hover:text-red-700 transition cursor-pointer"
                                         type="button">
                                     Take Action
                                     <svg class="w-3 h-3 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -59,10 +71,10 @@
                                      class="z-50 hidden bg-white border border-gray-200 shadow-xl w-40 text-left">
                                     <ul class="text-base">
                                         <li>
-                                            <a href="#" class="block px-4 py-2 text-blue-500 hover:bg-gray-50 hover:text-blue-600">Read</a>
+                                            <a href="{{ route("admin.messages.show", $m->id) }}" class="block px-4 py-2 text-blue-500 hover:bg-gray-50 hover:text-blue-600">{{ $m->is_answered ? 'Read' : 'Read & Reply' }}</a>
                                         </li>
                                         <li>
-                                            <form action="" method="POST">
+                                            <form action="{{ route('admin.messages.destroy', $m->id) }}" method="POST">
                                                 @csrf @method('DELETE')
                                                 <button type="submit"
                                                         class="block w-full cursor-pointer text-red-500 text-left px-4 py-2 hover:bg-red-50 hover:text-red-600">
