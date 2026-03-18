@@ -32,10 +32,10 @@
                             <div>
                                 <h3 class="text-sm font-bold uppercase tracking-wider text-black mb-4">Categories</h3>
                                 <div class="space-y-2">
-                                    @foreach(['Climbing Shoes', 'Chalk & Bags', 'Harnesses', 'Ropes', 'Carabiners', 'Apparel'] as $cat)
+                                    @foreach($categories as $category)
                                         <div class="flex items-center">
-                                            <input type="checkbox" id="{{ Str::slug($cat) }}" class="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-500">
-                                            <label for="{{ Str::slug($cat) }}" class="ml-3 text-sm font-medium text-gray-600 hover:text-black cursor-pointer">{{ $cat }}</label>
+                                            <input type="checkbox" id="{{ $category->slug }}" class="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-500">
+                                            <label for="{{ $category->slug }}" class="ml-3 text-sm font-medium text-gray-600 hover:text-black cursor-pointer">{{ $category->name }}</label>
                                         </div>
                                     @endforeach
                                 </div>
@@ -46,10 +46,10 @@
                             <div>
                                 <h3 class="text-sm font-bold uppercase tracking-wider text-black mb-4">Brands</h3>
                                 <div class="space-y-2">
-                                    @foreach(['La Sportiva', 'Black Diamond', 'Petzl', 'Scarpa', 'Mammut'] as $brand)
+                                    @foreach($brands as $brand)
                                         <div class="flex items-center">
-                                            <input type="checkbox" id="{{ Str::slug($brand) }}" class="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-500">
-                                            <label for="{{ Str::slug($brand) }}" class="ml-3 text-sm font-medium text-gray-600 hover:text-black cursor-pointer">{{ $brand }}</label>
+                                            <input type="checkbox" id="{{ $brand->slug }}" class="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-500">
+                                            <label for="{{ $brand->slug }}" class="ml-3 text-sm font-medium text-gray-600 hover:text-black cursor-pointer">{{ $brand->name }}</label>
                                         </div>
                                     @endforeach
                                 </div>
@@ -108,25 +108,17 @@
                         <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
                             @foreach($products as $p)
                                 <x-product-card
-                                    :id="$p['id']"
-                                    :image="$p['image']"
-                                    :name="$p['name']"
-                                    :price="$p['price']"
-                                    :badge="$p['badge']"
-                                    :url="$p['url']"
+                                    :id="$p->id"
+                                    :image="asset('assets/img/'.$p->primaryImage->path)"
+                                    :name="$p->name"
+                                    :price="$p->price->price"
+                                    :badge="$p->badge->name"
+                                    :url="$p->id"
                                 />
                             @endforeach
                         </div>
 
-                        <div class="mt-12 flex justify-center">
-                            <nav class="inline-flex -space-x-px rounded-md shadow-sm">
-                                <a href="#" class="inline-flex items-center rounded-l-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50">Previous</a>
-                                <a href="#" class="inline-flex items-center border border-gray-300 bg-red-600 px-4 py-2 text-sm font-medium text-white">1</a>
-                                <a href="#" class="inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50">2</a>
-                                <a href="#" class="inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50">3</a>
-                                <a href="#" class="inline-flex items-center rounded-r-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50">Next</a>
-                            </nav>
-                        </div>
+                        {{ $products->links() }}
                     </div>
 
                 </div>

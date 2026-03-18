@@ -21,6 +21,10 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ContactMessagesSeeder::class,
             UserAvatarSeeder::class,
+            CategorySeeder::class,
+            BrandSeeder::class,
+            BadgeSeeder::class,
+            ProductSeeder::class,
         ]);
     }
 }
