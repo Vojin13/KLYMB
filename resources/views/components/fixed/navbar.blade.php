@@ -54,7 +54,7 @@
                              class="w-8 h-8 rounded-full border border-gray-300 object-cover hover:ring-2 hover:ring-red-600 transition-all">
                     @else
                         <div class="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-white text-xs font-bold uppercase border border-red-700 hover:ring-1 hover:ring-red-300 transition-all">
-                            {{ substr(auth()->user()->first_name, 0, 1) }}
+                            {{ substr(auth()->user()->username, 0, 1) }}
                         </div>
                     @endif
                 </button>
