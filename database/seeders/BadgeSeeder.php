@@ -13,7 +13,7 @@ class BadgeSeeder extends Seeder
      */
     public function run(): void
     {
-        $badges = ['New Arrival', 'In stock' ,'Best Seller', 'Limited Edition', 'Up to 35% off'];
+        $badges = ['New Arrival', 'In Stock' ,'Best Seller', 'Limited Edition', 'Up to 35% off'];
 
         foreach($badges as $badge) {
             Badge::create([

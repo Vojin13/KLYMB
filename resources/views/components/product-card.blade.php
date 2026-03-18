@@ -13,13 +13,25 @@
         <div class="mb-4 flex items-center justify-between gap-4">
             @if($badge)
                 @php
-                    $badgeClass = match($badge) {
-                        'New Arrival'     => 'bg-green-100 text-green-600',
-                        'Best Seller'     => 'bg-blue-100 text-blue-600',
-                        'Limited Edition' => 'bg-yellow-100 text-yellow-700',
-                        'In Stock' => 'bg-gray-100 text-gray-600',
-                        default => 'bg-red-100 text-red-600'
-                    };
+                    $badgeClass = '';
+
+                    switch(strtolower($badge)) {
+                        case 'new arrival':
+                            $badgeClass = 'bg-green-100 text-green-600';
+                            break;
+                        case 'best seller':
+                            $badgeClass = 'bg-blue-100 text-blue-600';
+                            break;
+                        case 'limited edition':
+                            $badgeClass = 'bg-yellow-100 text-yellow-700';
+                            break;
+                        case 'in stock':
+                            $badgeClass = 'bg-gray-100 text-gray-600';
+                            break;
+                        default:
+                            $badgeClass = 'bg-red-100 text-red-600';
+                            break;
+                    }
                 @endphp
                 <span class="me-2 rounded {{ $badgeClass }} px-2.5 py-0.5 text-xs font-bold">
                     {{ $badge }}

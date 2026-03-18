@@ -48,12 +48,12 @@
             @foreach($topPicks as $p)
 
                 <x-product-card
-                    :id="$p['id']"
-                    :image="$p['image']"
-                    :name="$p['name']"
-                    :price="$p['price']"
-                    :badge="$p['badge']"
-                    :url="$p['url']"
+                    :id="$p->id"
+                    :image="asset('assets/img/'.$p->primaryImage->path)"
+                    :name="$p->name"
+                    :price="$p->price->price"
+                    :badge="$p->badge->name"
+                    :url="$p->id"
                 />
 
             @endforeach
@@ -281,15 +281,15 @@
 
         <div class="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
 
-            @foreach($bestSellingGear as $p)
+            @foreach($bestSellers as $p)
 
                 <x-product-card
-                    :id="$p['id']"
-                    :image="$p['image']"
-                    :name="$p['name']"
-                    :price="$p['price']"
-                    :badge="$p['badge']"
-                    :url="$p['url']"
+                    :id="$p->id"
+                    :image="asset('assets/img/'.$p->primaryImage->path)"
+                    :name="$p->name"
+                    :price="$p->price->price"
+                    :badge="$p->badge->name"
+                    :url="$p->id"
                 />
 
             @endforeach
