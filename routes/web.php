@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 
+// public rute
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('/about', 'pages.about-us')->name('about');
 Route::view('/membership', 'pages.membership')->name('membership');
@@ -17,6 +18,7 @@ Route::resource('/products', ProductController::class)->only(['index', 'show'])-
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 
+// samo za neulogovane korisnike
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
     Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
@@ -24,11 +26,18 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
 });
 
+// samo za ulogovane korisnike
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
 
-Route::group(['middleware' => ['auth', 'admin:admin'], 'prefix' => 'admin'], function () {
+// za member ulogu
+Route::group(['middleware' => ['auth', 'role:member'], 'prefix' => 'member'], function() {
+
+});
+
+// za admin ulogu
+Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::resource('users', UserController::class)->names('users');
     Route::resource('messages', ContactMessageController::class)->only(['index', 'destroy', 'show', 'update'])->names('messages');
