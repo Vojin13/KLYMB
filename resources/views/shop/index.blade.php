@@ -113,7 +113,7 @@
                                     :name="$p->name"
                                     :price="$p->price->price"
                                     :badge="$p->badge->name"
-                                    :url="$p->id"
+                                    :url="route('products.show',$p)"
                                 />
                             @endforeach
                         </div>

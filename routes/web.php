@@ -7,12 +7,13 @@ use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\AuthController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::view('/about', 'pages.about-us')->name('about');
+Route::resource('/products', ProductController::class)->names('products');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::view('/membership', 'pages.membership')->name('membership');
 
