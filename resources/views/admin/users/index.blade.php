@@ -76,11 +76,20 @@
                                         <a href="{{ route('admin.users.edit', $u) }}" class="block px-4 py-2 text-blue-500 hover:bg-gray-50 hover:text-blue-600">Edit</a>
                                     </li>
                                     <li>
-                                        @if($u->is_active)
-                                            <a href="#" class="block px-4 py-2 text-yellow-600 hover:bg-gray-50 hover:text-yellow-700">Ban</a>
-                                        @else
-                                            <a href="#" class="block px-4 py-2 text-yellow-600 hover:bg-gray-50 hover:text-yellow-700">Unban</a>
-                                        @endif
+                                        <form action="{{ route('admin.users.ban', $u->id) }}" method="POST">
+                                            @csrf
+                                            @method('PATCH')
+
+                                            @if($u->is_active)
+                                                <button type="submit" class="block w-full text-left px-4 py-2 text-yellow-600 hover:bg-gray-50 hover:text-yellow-700 transition cursor-pointer font-medium">
+                                                    Ban
+                                                </button>
+                                            @else
+                                                <button type="submit" class="block w-full text-left px-4 py-2 text-green-600 hover:bg-gray-50 hover:text-green-700 transition cursor-pointer font-medium">
+                                                    Unban
+                                                </button>
+                                            @endif
+                                        </form>
 
                                     </li>
                                     <li class="border-t border-gray-100">

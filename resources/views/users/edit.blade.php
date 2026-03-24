@@ -3,7 +3,6 @@
 @section('title', 'KLYMB | Edit profile')
 
 @section('content')
-
     <div class="max-w-4xl mx-auto space-y-8 py-10 px-4">
         @if ($errors->any())
             <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6 rounded-r-lg shadow-sm">
@@ -112,9 +111,8 @@
 
                     <div class="flex flex-col items-center justify-start py-10 bg-gray-50 border-2 border-gray-100 relative">
                         <label class="text-xs font-black uppercase tracking-widest text-gray-900 mb-8">Profile Portrait</label>
-
                         <div class="mb-10 relative inline-block">
-                            <img src="{{ $user->avatars ? asset('storage/' . $user->active_avatar->path) : asset('images/default-avatar.png') }}"
+                            <img src="{{ $user->avatars->isNotEmpty() ? asset('storage/' . $user->active_avatar->path) : asset('images/default-avatar.png') }}"
                                  alt="Avatar"
                                  class="h-56 w-56 object-cover border-8 border-white shadow-xl relative z-10">
                             <div class="absolute -inset-2 border-2 border-black z-0 translate-x-2 translate-y-2"></div>

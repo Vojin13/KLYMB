@@ -106,4 +106,20 @@ class UserController extends Controller
 
         return redirect()->route('admin.users.index')->with('message','User: '. $userInfo .' deleted successfully!');
     }
+
+    public function toggleBan(User $user)
+    {
+        $user->is_active = !$user->is_active;
+        if($user->is_active){
+            $message = "Succesfully unbanned the user $user->username!";
+        }
+        else {
+            $message = "Succesfully banned the user $user->username!";
+        }
+        $user->save();
+
+        return back()->with([
+            "message" => $message,
+        ]);
+    }
 }

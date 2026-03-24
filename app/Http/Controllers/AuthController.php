@@ -22,6 +22,14 @@ class AuthController extends Controller
         $credentials = $request->validated();
 
         if(auth()->attempt($credentials)) {
+            if(!auth()->user()->is_active)
+            {
+                auth()->logout();
+                return back()->withErrors([
+                    'email' => 'Your account is not activated or banned.'
+                ]);
+            }
+
             $request->session()->regenerate();
             return redirect()->route('home');
         }

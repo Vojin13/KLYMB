@@ -45,4 +45,5 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::resource('users', UserController::class)->names('users');
     Route::resource('messages', ContactMessageController::class)->only(['index', 'destroy', 'show', 'update'])->names('messages');
     Route::resource('products', AdminProductController::class)->names('products');
+    Route::patch('/ban/{user}', [UserController::class, 'toggleBan'])->name('users.ban');
 });
