@@ -65,7 +65,7 @@
                     </div>
                     <ul class="py-2 text-sm text-gray-900" aria-labelledby="dropdownUserButton">
                         <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 cursor-pointer">Edit Profile</a>
+                            <a href="{{ route('user.edit', auth()->user()) }}" class="block px-4 py-2 hover:bg-gray-100 cursor-pointer">Edit Profile</a>
                         </li>
                     </ul>
                     <div class="py-1">

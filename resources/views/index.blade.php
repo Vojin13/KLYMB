@@ -46,6 +46,10 @@
         <div class="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
 
             @foreach($topPicks as $p)
+                @php
+                $productUrl = "products/".$p->id;
+                @endphp
+
 
                 <x-product-card
                     :id="$p->id"
@@ -53,7 +57,7 @@
                     :name="$p->name"
                     :price="$p->price->price"
                     :badge="$p->badge->name"
-                    :url="$p->id"
+                    :url="$productUrl"
                 />
 
             @endforeach
@@ -282,6 +286,9 @@
         <div class="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
 
             @foreach($bestSellers as $p)
+                @php
+                    $productUrl = "products/".$p->id;
+                @endphp
 
                 <x-product-card
                     :id="$p->id"
@@ -289,7 +296,7 @@
                     :name="$p->name"
                     :price="$p->price->price"
                     :badge="$p->badge->name"
-                    :url="$p->id"
+                    :url="$productUrl"
                 />
 
             @endforeach

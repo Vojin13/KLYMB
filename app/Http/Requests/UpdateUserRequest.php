@@ -29,8 +29,9 @@ class UpdateUserRequest extends FormRequest
             'username' => ['required','string','max:255','min:3', Rule::unique('users','username')->ignore($this->user)],
             'date_of_birth' => 'required|date|before:today',
             'password' => 'nullable|string|min:8|confirmed',
-            'role_id' => 'required|integer|exists:roles,id',
+            'role_id' => 'sometimes|required|exists:roles,id',
             'is_active' => 'nullable|boolean',
+            'avatar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ];
     }
 }

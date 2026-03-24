@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EditUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -29,6 +30,8 @@ Route::group(['middleware' => 'guest'], function () {
 // samo za ulogovane korisnike
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+    Route::get('/user/edit/{user}', [EditUserController::class, 'edit'])->name('user.edit');
+    Route::patch('/user/edit/{user}', [EditUserController::class, 'update'])->name('user.update');
 });
 
 // za member ulogu
@@ -37,7 +40,7 @@ Route::group(['middleware' => ['auth', 'role:member'], 'prefix' => 'member'], fu
 });
 
 // za admin ulogu
-Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin'], function () {
+Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::resource('users', UserController::class)->names('users');
     Route::resource('messages', ContactMessageController::class)->only(['index', 'destroy', 'show', 'update'])->names('messages');
