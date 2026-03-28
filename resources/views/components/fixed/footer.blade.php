@@ -22,10 +22,9 @@
             <div>
                 <h2 class="mb-6 text-sm font-bold uppercase tracking-widest text-red-600">Quick Links</h2>
                 <ul class="space-y-4 text-gray-400 font-medium">
-                    <li><a href="#" class="hover:text-white transition">Gym Membership</a></li>
-                    <li><a href="#" class="hover:text-white transition">Shop All Gear</a></li>
-                    <li><a href="#" class="hover:text-white transition">Climbing Programs</a></li>
-                    <li><a href="#" class="hover:text-white transition">Upcoming Events</a></li>
+                    <li><a href="{{ route('memberships.index') }}" class="hover:text-white transition">Gym Membership</a></li>
+                    <li><a href="{{ route('products.index') }}" class="hover:text-white transition">Shop All Gear</a></li>
+                    <li><a href="{{ route('memberships.index') }}" class="hover:text-white transition">Climbing Programs</a></li>
                 </ul>
             </div>
 
@@ -35,7 +34,7 @@
                     <li><a href="#" class="hover:text-white transition">Shipping Policy</a></li>
                     <li><a href="#" class="hover:text-white transition">Returns & Exchanges</a></li>
                     <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
-                    <li><a href="#" class="hover:text-white transition">Contact Us</a></li>
+                    <li><a href="{{ route('contact') }}" class="hover:text-white transition">Contact Us</a></li>
                 </ul>
             </div>
 

@@ -46,11 +46,13 @@
                         <path d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" /><path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                     </svg>
                 </a>
+                {{--
                 <a href="" class="rounded-lg p-2 hover:cursor-pointer text-gray-500 hover:bg-gray-100 hover:text-gray-900">
                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path d="M12 6C6.5 1 1 8 5.8 13l6.2 7 6.2-7C23 8 17.5 1 12 6Z" />
                     </svg>
                 </a>
+                --}}
             </div>
         </div>
 

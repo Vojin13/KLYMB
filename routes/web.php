@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\CategoriesController;
 use App\Http\Controllers\EditUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -14,7 +15,7 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 // public rute
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('/about', 'pages.about-us')->name('about');
-Route::view('/membership', 'pages.membership')->name('membership');
+Route::view('/membership', 'pages.membership')->name('memberships.index');
 Route::resource('/products', ProductController::class)->only(['index', 'show'])->names('products');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
@@ -46,4 +47,5 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::resource('messages', ContactMessageController::class)->only(['index', 'destroy', 'show', 'update'])->names('messages');
     Route::resource('products', AdminProductController::class)->names('products');
     Route::patch('/ban/{user}', [UserController::class, 'toggleBan'])->name('users.ban');
+    Route::resource('categories', CategoriesController::class)->names('categories');
 });

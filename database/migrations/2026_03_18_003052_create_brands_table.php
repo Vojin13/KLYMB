@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug');
             $table->string('description')->nullable();
             $table->string('website')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

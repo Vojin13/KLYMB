@@ -10,7 +10,7 @@
                 @php
                     $navLinks = [
                         ['name' => 'Home', 'route' => 'home'],
-                        ['name' => 'Membership', 'route' => 'membership'],
+                        ['name' => 'Membership', 'route' => 'memberships.index'],
                         ['name' => 'Shop', 'route' => 'products.index'],
                         ['name' => 'About us', 'route' => 'about'],
                         ['name' => 'Contact', 'route' => 'contact']

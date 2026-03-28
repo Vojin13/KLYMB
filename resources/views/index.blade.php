@@ -19,11 +19,11 @@
                 </p>
 
                 <div class="flex flex-wrap gap-4">
-                    <a href="#" class="uppercase inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white rounded-lg bg-red-600 hover:bg-red-700 transition">
+                    <a href="{{ route('products.index') }}" class="uppercase inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white rounded-lg bg-red-600 hover:bg-red-700 transition">
                         Shop now
                         <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </a>
-                    <a href="#" class="uppercase inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white border border-gray-400 rounded-lg hover:bg-white hover:text-black transition">
+                    <a href="{{ route('memberships.index') }}" class="uppercase inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white border border-gray-400 rounded-lg hover:bg-white hover:text-black transition">
                         Programs
                         <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </a>
@@ -205,7 +205,7 @@
         </div>
 
         <div class="mt-20 text-center">
-            <a href="#" class="group relative inline-flex items-center justify-center px-10 py-4 font-black uppercase tracking-widest text-white border-2 border-white hover:border-red-600 transition-all duration-300">
+            <a href="{{ route('memberships.index') }}" class="group relative inline-flex items-center justify-center px-10 py-4 font-black uppercase tracking-widest text-white border-2 border-white hover:border-red-600 transition-all duration-300">
                 <span class="relative z-10">View Pricing</span>
                 <div class="absolute inset-0 bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
             </a>
@@ -319,10 +319,10 @@
                     Join KLYMB today. Whether you're a first-timer or a pro, our community is waiting for you. Get your first session with 50% off!
                 </p>
                 <div class="mt-10 flex items-center justify-center gap-x-6">
-                    <a href="#" class="rounded-lg bg-red-600 px-8 py-3.5 text-sm font-bold uppercase text-white shadow-sm hover:bg-red-700 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
+                    <a href="{{ route('memberships.index') }}" class="rounded-lg bg-red-600 px-8 py-3.5 text-sm font-bold uppercase text-white shadow-sm hover:bg-red-700 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
                         Get Started
                     </a>
-                    <a href="#" class="uppercase inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white border border-gray-400 rounded-lg hover:bg-white hover:text-black transition">
+                    <a href="{{ route('memberships.index') }}" class="uppercase inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white border border-gray-400 rounded-lg hover:bg-white hover:text-black transition">
                         View Memberships
                     </a>
                 </div>
