@@ -31,6 +31,7 @@ class AuthController extends Controller
             }
 
             $request->session()->regenerate();
+            session()->put('user', auth()->user());
             return redirect()->route('home');
         }
 
