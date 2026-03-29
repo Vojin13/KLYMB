@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -24,15 +26,25 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateCategoryRequest $request)
     {
-        //
+        $data = $request->validated();
+        $category = new Category();
+        try{
+            $category->fill($data);
+            $category->save();
+        }
+        catch (\Exception $exception){
+            Log::error($exception->getMessage());
+        }
+
+        return redirect()->route('admin.categories.index')->with('success', 'Category '. $category->name .' created successfully');
     }
 
     /**
@@ -46,17 +58,27 @@ class CategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit', ['category' => $category]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        try{
+            $data = $request->validated();
+
+            $category->update($data);
+            $category->save();
+            $message = "Category ID: " . $category->id . " Name: " . $category->name. " updated successfully";
+        }
+        catch (\Exception $exception){
+            Log::error($exception->getMessage());
+        }
+        return redirect()->route('admin.categories.index')->with('success', $message);
     }
 
     /**

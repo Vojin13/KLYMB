@@ -52,7 +52,7 @@
                 @if($categories->total() > 0)
                     @foreach($categories as $c)
                         <tr class="{{ $loop->iteration % 2 == 0 ? 'bg-white' : 'bg-gray-50'}} hover:bg-gray-100 transition-colors">
-                            <td class="p-6 font-mono text-sm text-gray-400">#{{ $c->id }}</td>
+                            <td class="p-6 font-mono text-sm text-gray-400">#{{ $loop->iteration }}</td>
                             <td class="p-6 font-bold text-gray-900">{{ $c->name }}</td>
                             <td class="p-6 text-blue-500 text-sm italic font-medium">/{{ $c->slug }}</td>
                             <td class="p-6 text-gray-600 text-sm">
@@ -74,7 +74,7 @@
                                      class="z-50 hidden bg-white border border-gray-200 shadow-xl w-40 text-left">
                                     <ul class="text-base">
                                         <li>
-                                            <a href="#" class="block px-4 py-2 text-blue-500 hover:bg-gray-50 hover:text-blue-600">Edit</a>
+                                            <a href="{{ route('admin.categories.edit', $c) }}" class="block px-4 py-2 text-blue-500 hover:bg-gray-50 hover:text-blue-600">Edit</a>
                                         </li>
                                         <li>
                                             <form action="{{ route('admin.categories.destroy', $c) }}" method="POST">
