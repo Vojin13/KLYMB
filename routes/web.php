@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\admin\AdminProductController;
+use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoriesController;
 use App\Http\Controllers\EditUserController;
 use Illuminate\Support\Facades\Route;
@@ -10,7 +12,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ContactMessageController;
-use App\Http\Controllers\Admin\ProductController as AdminProductController;
 
 // public rute
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -48,4 +49,5 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::resource('products', AdminProductController::class)->names('products');
     Route::patch('/ban/{user}', [UserController::class, 'toggleBan'])->name('users.ban');
     Route::resource('categories', CategoriesController::class)->names('categories');
+    Route::resource('brands', BrandController::class)->names('brands');
 });
