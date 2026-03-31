@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateBrandRequest;
+use App\Http\Requests\UpdateBrandRequest;
+use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class BrandController extends Controller
 {
@@ -12,7 +16,9 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        $brands = Brand::paginate(10);
+
+        return view('admin.brands.index', compact('brands'));
     }
 
     /**
@@ -20,15 +26,24 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.brands.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateBrandRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        try{
+            $brand = Brand::create($data);
+            $message = "Brand: " . $brand->name . " has been created successfully.";
+            return redirect()->route('admin.brands.index')->with('success', $message);
+        }
+        catch (\Exception $exception){
+            Log::error($exception->getMessage());
+        }
     }
 
     /**
@@ -42,24 +57,39 @@ class BrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Brand $brand)
     {
-        //
+        return view('admin.brands.edit', compact('brand'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateBrandRequest $request, Brand $brand)
     {
-        //
+        $data = $request->validated();
+        try {
+            $brand->update($data);
+            $message = "Brand: " . $brand->name . " has been updated successfully.";
+            return redirect()->route('admin.brands.index')->with('success', $message);
+        }
+        catch (\Exception $exception){
+            Log::error($exception->getMessage());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Brand $brand)
     {
-        //
+        try {
+            $message = "Brand: " . $brand->name . " has been deleted successfully.";
+            $brand->delete();
+            return redirect()->route('admin.brands.index')->with('success', $message);
+        }
+        catch (\Exception $exception){
+            Log::error($exception->getMessage());
+        }
     }
 }

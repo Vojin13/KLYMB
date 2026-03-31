@@ -47,9 +47,16 @@
                 <span class="font-medium">Categories</span>
             </a>
 
-            <a href="#" class="flex items-center gap-3 py-3 px-4 rounded-lg hover:bg-red-600 hover:text-white transition-all duration-200">
+            <a href="{{ route('admin.brands.index') }}" class="flex items-center gap-3 py-3 px-4 rounded-lg hover:bg-red-600 hover:text-white transition-all duration-200">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
                 <span class="font-medium">Brands</span>
+            </a>
+
+            <a href="{{ route('admin.badges.index') }}" class="flex items-center gap-3 py-3 px-4 rounded-lg hover:bg-red-600 hover:text-white transition-all duration-200">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-1.006 3.505 3.505 0 015.238 0 3.42 3.42 0 001.946 1.006 3.505 3.505 0 013.97 3.97 3.42 3.42 0 001.006 1.946 3.505 3.505 0 010 5.238 3.42 3.42 0 00-1.006 1.946 3.505 3.505 0 01-3.97 3.97 3.42 3.42 0 00-1.946 1.006 3.505 3.505 0 01-5.238 0 3.42 3.42 0 00-1.946-1.006 3.505 3.505 0 01-3.97-3.97 3.42 3.42 0 00-1.006-1.946 3.505 3.505 0 010-5.238 3.42 3.42 0 001.006-1.946 3.505 3.505 0 013.97-3.97z"></path>
+                </svg>
+                <span class="font-medium">Badges</span>
             </a>
 
             <div class="pt-4 pb-2 px-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">Sales</div>

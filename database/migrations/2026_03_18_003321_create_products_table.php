@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('description');
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->foreignId('brand_id')->constrained()->onDelete('cascade');
-            $table->foreignId('badge_id')->constrained()->onDelete('cascade');
+            $table->foreignId('badge_id')->nullable()->constrained()->onDelete('set null');
             $table->softDeletes();
             $table->timestamps();
         });

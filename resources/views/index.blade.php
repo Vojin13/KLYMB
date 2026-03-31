@@ -56,8 +56,10 @@
                     :image="asset('assets/img/'.$p->primaryImage->path)"
                     :name="$p->name"
                     :price="$p->price->price"
-                    :badge="$p->badge->name"
+                    :badge="$p->badge"
                     :url="$productUrl"
+                    :brand="$p->brand->name"
+                    :category="$p->category->name"
                 />
 
             @endforeach
@@ -295,8 +297,10 @@
                     :image="asset('assets/img/'.$p->primaryImage->path)"
                     :name="$p->name"
                     :price="$p->price->price"
-                    :badge="$p->badge->name"
+                    :badge="$p->badge"
                     :url="$productUrl"
+                    :brand="$p->brand->name"
+                    :category="$p->category->name"
                 />
 
             @endforeach

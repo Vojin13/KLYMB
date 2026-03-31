@@ -112,7 +112,9 @@
                                     :image="asset('assets/img/'.$p->primaryImage->path)"
                                     :name="$p->name"
                                     :price="$p->price->price"
-                                    :badge="$p->badge->name"
+                                    :badge="$p->badge"
+                                    :brand="$p->brand->name"
+                                    :category="$p->category->name"
                                     :url="route('products.show',$p)"
                                 />
                             @endforeach

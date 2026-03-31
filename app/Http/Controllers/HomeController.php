@@ -78,8 +78,18 @@ class HomeController extends Controller
 //    ];
 
     public function index() {
-        $topPicks = Product::orderBy('name','asc')->take(4)->get();
-        $bestSellers = Product::select('products.*')->orderBy('products.name','desc')->join('badges', 'products.badge_id', '=', 'badges.id')->where('badges.name', 'Best Seller')->take(4)->get();
+        $topPicks = Product::with(['badge', 'primaryImage', 'price'])
+            ->orderBy('name', 'asc')
+            ->take(4)
+            ->get();
+
+        $bestSellers = Product::with(['badge', 'primaryImage', 'price'])
+            ->select('products.*')
+            ->join('badges', 'products.badge_id', '=', 'badges.id')
+            ->where('badges.name', 'Best Seller')
+            ->orderBy('products.name', 'desc')
+            ->take(4)
+            ->get();
 
         return view('index', compact('topPicks', 'bestSellers'));
     }

@@ -14,12 +14,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::query()->paginate(15);
+        $products = Product::with(['badge', 'primaryImage', 'price'])
+            ->latest()
+            ->paginate(15);
 
         $categories = Category::all();
         $brands = Brand::all();
 
-        return view('shop.index', ['products' => $products, 'categories' => $categories, 'brands' => $brands]);
+        return view('shop.index', compact('products', 'categories', 'brands'));
     }
 
     /**

@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('badges', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('bg_color');
+            $table->string('text_color');
             $table->softDeletes();
             $table->timestamps();
         });

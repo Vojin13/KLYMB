@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminProductController;
+use App\Http\Controllers\admin\BadgesController;
 use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoriesController;
 use App\Http\Controllers\EditUserController;
@@ -48,6 +49,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::resource('messages', ContactMessageController::class)->only(['index', 'destroy', 'show', 'update'])->names('messages');
     Route::resource('products', AdminProductController::class)->names('products');
     Route::patch('/ban/{user}', [UserController::class, 'toggleBan'])->name('users.ban');
-    Route::resource('categories', CategoriesController::class)->names('categories');
-    Route::resource('brands', BrandController::class)->names('brands');
+    Route::resource('categories', CategoriesController::class)->except('show')->names('categories');
+    Route::resource('brands', BrandController::class)->except('show')->names('brands');
+    Route::resource('badges', BadgesController::class)->except('show')->names('badges');
 });
