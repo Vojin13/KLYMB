@@ -53,6 +53,10 @@ class User extends Authenticatable
         return $this->avatars()->where('is_active', true)->first();
     }
 
+    public function activity_logs() {
+        return $this->hasMany(ActivityLog::class);
+    }
+
     protected $casts = [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
