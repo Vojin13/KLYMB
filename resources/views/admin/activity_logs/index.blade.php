@@ -71,11 +71,10 @@
 
                         <td class="p-6">
                             @if($log->data && $log->data !== '[]')
-                                <button type="button"
-                                        onclick="alert('{!! addslashes($log->data) !!}')"
+                                <a href="{{ route('admin.logs.show', $log) }}"
                                         class="text-sm font-black uppercase tracking-widest text-red-600 hover:text-black transition-colors cursor-pointer underline underline-offset-4">
                                     View Data
-                                </button>
+                                </a>
                             @else
                                 <span class="text-sm text-gray-300 uppercase font-bold tracking-widest">Empty</span>
                             @endif

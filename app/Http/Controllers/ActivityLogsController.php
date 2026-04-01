@@ -36,9 +36,9 @@ class ActivityLogsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(ActivityLog $log)
     {
-        //
+        return view('admin.activity_logs.show', compact('log'));
     }
 
     /**
