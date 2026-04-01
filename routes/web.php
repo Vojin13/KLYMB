@@ -48,7 +48,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::resource('users', UserController::class)->names('users');
     Route::resource('messages', ContactMessageController::class)->only(['index', 'destroy', 'show', 'update'])->names('messages');
-    Route::resource('products', AdminProductController::class)->names('products');
+    Route::resource('products', AdminProductController::class)->except('show')->names('products');
     Route::patch('/ban/{user}', [UserController::class, 'toggleBan'])->name('users.ban');
     Route::resource('categories', CategoriesController::class)->except('show')->names('categories');
     Route::resource('brands', BrandController::class)->except('show')->names('brands');

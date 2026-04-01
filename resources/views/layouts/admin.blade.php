@@ -37,7 +37,7 @@
 
             <div class="pt-4 pb-2 px-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">Shop Management</div>
 
-            <a href="#" class="flex items-center gap-3 py-3 px-4 rounded-lg hover:bg-red-600 hover:text-white transition-all duration-200">
+            <a href="{{ route('admin.products.index') }}" class="flex items-center gap-3 py-3 px-4 rounded-lg hover:bg-red-600 hover:text-white transition-all duration-200">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
                 <span class="font-medium">Products</span>
             </a>
