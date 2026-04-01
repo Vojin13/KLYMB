@@ -16,21 +16,21 @@
 
     <section class="mx-auto max-w-screen-xl px-4 pb-20">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            
+
             <div class="lg:col-span-6">
                 <div class="sticky top-24 space-y-4">
                     <div class="aspect-square bg-gray-100 overflow-hidden border border-gray-100">
-                        <img id="main-image" 
-                             src="{{ asset('assets/img/'.$product->primaryImage->path) }}" 
-                             alt="{{ $product->name }}" 
+                        <img id="main-image"
+                             src="{{ asset('storage/'.$product->primaryImage->path) }}"
+                             alt="{{ $product->name }}"
                              class="w-full h-full object-cover transition-opacity duration-300 ease-in-out opacity-100">
                     </div>
-                    
+
                     <div class="grid grid-cols-4 gap-4">
                         @foreach ($product->images as $i)
-                            <div onclick="changeImage('{{ asset('assets/img/' . $i->path) }}', this)" 
+                            <div onclick="changeImage('{{ asset('storage/' . $i->path) }}', this)"
                                  class="thumbnail-item aspect-square bg-gray-100 border-2 {{ $i->is_primary ? 'border-red-600' : 'border-transparent' }} cursor-pointer transition-all duration-300 hover:border-gray-300">
-                                <img src="{{ asset('assets/img/' . $i->path) }}" 
+                                <img src="{{ asset('storage/' . $i->path) }}"
                                      class="w-full h-full object-cover {{ $i->is_primary ? 'opacity-100' : 'opacity-70' }} hover:opacity-100 transition-opacity">
                             </div>
                         @endforeach
@@ -45,13 +45,13 @@
                             {{ $product->badge->name }}
                         </span>
                     @endif
-                    
+
                     <h1 class="text-4xl md:text-5xl font-black uppercase tracking-tighter text-black mb-2">
                         {{ $product->name }}
                     </h1>
-                    
+
                     <p class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-6 tracking-widest">Brand: {{ $product->brand->name }}</p>
-                    
+
                     <div class="flex items-baseline gap-4">
                         <span class="text-3xl font-black text-black">€{{ number_format($product->price->price, 2) }}</span>
                     </div>
@@ -107,7 +107,7 @@
                             </div>
                         </div>
                     </details>
-                    
+
                     <details class="group py-4 border-b border-gray-100">
                         <summary class="flex justify-between items-center cursor-pointer list-none">
                             <span class="text-xs font-black uppercase tracking-widest text-black">Shipping & Returns</span>
@@ -129,10 +129,10 @@
      */
     function changeImage(src, element) {
         const mainImage = document.getElementById('main-image');
-        
+
         // 1. Počni fade-out (Tailwind klasa)
         mainImage.classList.add('opacity-0');
-        
+
         // 2. Zameni izvor slike nakon što se slika sakrije (300ms)
         setTimeout(() => {
             mainImage.src = src;

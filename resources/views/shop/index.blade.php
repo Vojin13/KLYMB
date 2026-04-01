@@ -109,7 +109,7 @@
                             @foreach($products as $p)
                                 <x-product-card
                                     :id="$p->id"
-                                    :image="asset('assets/img/'.$p->primaryImage->path)"
+                                    :image="asset('storage/' . $p->primaryImage->path)"
                                     :name="$p->name"
                                     :price="$p->price->price"
                                     :badge="$p->badge"

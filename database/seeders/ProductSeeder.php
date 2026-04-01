@@ -34,7 +34,7 @@ class ProductSeeder extends Seeder
             ]);
 
             $imageNumber = rand(1,8);
-            $image = 'image'.$imageNumber.'.png';
+            $image = 'products/image'.$imageNumber.'.png';
 
             ProductImage::create([
                 'is_primary' => true,
@@ -44,7 +44,7 @@ class ProductSeeder extends Seeder
             ]);
 
             $imageNumber = rand(1,8);
-            $image = 'image'.$imageNumber.'.png';
+            $image = 'products/image'.$imageNumber.'.png';
 
             ProductImage::create([
                 'is_primary' => false,
