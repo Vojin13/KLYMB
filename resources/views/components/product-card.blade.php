@@ -30,16 +30,16 @@
                 </a>
             </div>
         </div>
-        <div class="mt-2 flex flex-col gap-0.5">
 
+        <div class="mt-2 flex flex-col gap-0.5">
             <span class="text-sm font-bold uppercase text-red-500">{{ $brand }}</span>
         </div>
+
         <a href="{{ $url }}" class="text-lg font-bold leading-tight uppercase text-gray-900 hover:text-red-600 transition-colors">
             {{ $name }}
         </a>
 
         <div class="mt-2 flex flex-col gap-0.5">
-
             <span class="text-sm font-bold uppercase text-gray-500">{!! $category !!}</span>
         </div>
 
@@ -56,7 +56,11 @@
 
         <div class="mt-4 flex items-center justify-between gap-4 font-black">
             <p class="text-2xl text-gray-900">€{{ $price }}</p>
-            <button type="button" class="hover:cursor-pointer inline-flex items-center rounded-lg bg-[#1A252F] px-4 py-2.5 text-sm font-bold text-white hover:bg-black transition-colors">
+            <button
+                type="button"
+                class="add-to-cart-btn hover:cursor-pointer inline-flex items-center rounded-lg bg-[#1A252F] px-4 py-2.5 text-sm font-bold text-white hover:bg-black transition-colors"
+                data-id="{{ $id }}"
+            >
                 Add to cart
             </button>
         </div>

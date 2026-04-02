@@ -27,7 +27,10 @@
                     </div>
 
                     <div class="grid grid-cols-4 gap-4">
-                        @foreach ($product->images as $i)
+                        @foreach ($product->images->sortBy([
+                                            ['is_primary', 'desc'],
+                                            ['position', 'asc'],
+                                        ]) as $i)
                             <div onclick="changeImage('{{ asset('storage/' . $i->path) }}', this)"
                                  class="thumbnail-item aspect-square bg-gray-100 border-2 {{ $i->is_primary ? 'border-red-600' : 'border-transparent' }} cursor-pointer transition-all duration-300 hover:border-gray-300">
                                 <img src="{{ asset('storage/' . $i->path) }}"

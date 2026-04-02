@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => \App\Http\Middleware\RoleMiddleware::class,
         ]);
         $middleware->web(\App\Http\Middleware\ActivityLogMiddleware::class);
+        $middleware->redirectGuestsTo(fn () => abort(403, 'Access Denied. You do not have the required credentials to access this secure area. Please sign in with an authorized account to continue.'));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

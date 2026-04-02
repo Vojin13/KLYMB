@@ -36,6 +36,46 @@
             </p>
         </div>
 
+        <div class="mb-8 bg-white border-black p-6">
+            <form action="{{ route('admin.products.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div>
+                    <label class="block text-xs font-black uppercase tracking-widest mb-2 text-gray-500">Search Products</label>
+                    <input type="text"
+                           name="search"
+                           value="{{ request('search') }}"
+                           placeholder="Enter name..."
+                           class="w-full border-2 border-gray-200 focus:border-black p-3 text-sm outline-none transition font-bold">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-black uppercase tracking-widest mb-2 text-gray-500">Date From</label>
+                    <input type="date"
+                           name="date_from"
+                           value="{{ request('date_from') }}"
+                           class="w-full border-2 border-gray-200 focus:border-black p-3 text-sm outline-none transition font-bold">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-black uppercase tracking-widest mb-2 text-gray-500">Date To</label>
+                    <input type="date"
+                           name="date_to"
+                           value="{{ request('date_to') }}"
+                           class="w-full border-2 border-gray-200 focus:border-black p-3 text-sm outline-none transition font-bold">
+                </div>
+
+                <div class="flex items-end gap-2">
+                    <button type="submit"
+                            class="flex-1 cursor-pointer bg-black text-white border-2 border-black px-4 py-3 font-black uppercase tracking-widest hover:bg-red-600 transition text-xs">
+                        Filter
+                    </button>
+                    <a href="{{ route('admin.products.index') }}"
+                       class="flex-1 bg-gray-100 text-black border-2 border-black px-4 py-3 font-black uppercase tracking-widest hover:bg-black hover:text-white transition text-xs text-center">
+                        Reset
+                    </a>
+                </div>
+            </form>
+        </div>
+
         <div class="bg-white border border-gray-200 shadow-sm overflow-hidden rounded-sm">
             <table class="w-full text-left text-base">
                 <thead>
@@ -104,7 +144,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="6" class="p-12 text-center text-gray-400 font-black uppercase tracking-widest">No brands found.</td>
+                        <td colspan="6" class="p-12 text-center text-gray-400 font-black uppercase tracking-widest">No products found.</td>
                     </tr>
                 @endif
                 </tbody>

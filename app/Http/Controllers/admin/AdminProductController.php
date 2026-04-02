@@ -21,9 +21,25 @@ class AdminProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate(20);
+        $query = Product::query();
+
+        if($request->has('search') && $request->search != '') {
+            $keyword = $request->search;
+            $query->where('name', 'like', '%'.$keyword.'%')->orWhere('description', 'like', '%' . $keyword . '%');
+        }
+
+        if($request->has('date_from') && $request->date_from != '') {
+            $query->whereDate('created_at', '>=', $request->date_from);
+        }
+
+        if($request->has('date_to') && $request->date_to != '')
+        {
+            $query->whereDate('created_at', '<=', $request->date_to);
+        }
+
+        $products = $query->latest()->paginate(20)->withQueryString();
 
         return view('admin.products.index' , compact('products'));
     }

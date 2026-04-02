@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
     <title>@yield('title', 'KLYMB')</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 <x-fixed.navbar />
@@ -15,5 +16,6 @@
 
 <x-fixed.footer />
 @include('scripts.flowbite')
+@include('scripts.sweetalert')
 </body>
 </html>

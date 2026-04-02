@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\AdminProductController;
 use App\Http\Controllers\admin\BadgesController;
 use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoriesController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\EditUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -36,6 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
     Route::get('/user/edit/{user}', [EditUserController::class, 'edit'])->name('user.edit');
     Route::patch('/user/edit/{user}', [EditUserController::class, 'update'])->name('user.update');
+    Route::resource('/cart', CartController::class)->names('cart');
 });
 
 // za member ulogu
