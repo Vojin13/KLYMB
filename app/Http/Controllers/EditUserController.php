@@ -21,7 +21,7 @@ class EditUserController extends Controller
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
 
-            $fileName = time() . '_' . $file->getClientOriginalName();
+            $fileName = time() . '_'. uuid_create() . $file->getClientOriginalName();
             $path = $file->storeAs('avatars', $fileName, 'public');
             $extension = $file->getClientOriginalExtension();
             $size = $file->getSize();

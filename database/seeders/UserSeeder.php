@@ -28,5 +28,29 @@ class UserSeeder extends Seeder
             'is_active' => 1,
             'role_id' => 3
         ]);
+
+        User::create([
+            'first_name' => 'Admin',
+            'last_name' => 'Admin',
+            'username' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('admin'),
+            'date_of_birth' => date('Y-m-d', strtotime('-18 years')),
+            'email_verified_at' => now(),
+            'is_active' => 1,
+            'role_id' => 3
+        ]);
+
+        User::create([
+            'first_name' => 'User',
+            'last_name' => 'User',
+            'username' => 'user',
+            'email' => 'user@gmail.com',
+            'password' => Hash::make('user'),
+            'date_of_birth' => date('Y-m-d', strtotime('-18 years')),
+            'email_verified_at' => now(),
+            'is_active' => 1,
+            'role_id' => 1
+        ]);
     }
 }

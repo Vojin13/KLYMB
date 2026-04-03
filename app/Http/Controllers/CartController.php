@@ -43,7 +43,7 @@ class CartController extends Controller
             'quantity' => 'required|integer|min:1'
         ]);
 
-        $user = Auth::user();
+        $user = auth()->user();
         $productId = $request->product_id;
         $quantity = $request->quantity;
 
@@ -115,6 +115,21 @@ class CartController extends Controller
             }
 
             return redirect()->back()->with('error', 'Item not found in your cart.');
+        }
+        catch (\Exception $exception){
+            Log::error($exception->getMessage());
+        }
+    }
+
+    public function clear()
+    {
+        $cartItems = auth()->user()->cartItems()->get();
+
+        try {
+            foreach ($cartItems as $cartItem) {
+                $cartItem->delete();
+            }
+            return back()->with('success', 'Item removed from your cart.');
         }
         catch (\Exception $exception){
             Log::error($exception->getMessage());

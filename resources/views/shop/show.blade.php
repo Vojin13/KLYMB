@@ -68,6 +68,7 @@
                 </div>
 
                 <div class="space-y-6">
+                    {{--
                     <div>
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="text-xs font-black uppercase tracking-[0.2em] text-black">Select Size</h3>
@@ -80,6 +81,7 @@
                             <button class="py-3 border border-gray-200 text-sm font-bold hover:border-black transition text-gray-300 cursor-not-allowed" disabled>43</button>
                         </div>
                     </div>
+                    --}}
 
                     <div class="flex gap-4 pt-4">
                         <div class="flex items-center border border-gray-200">

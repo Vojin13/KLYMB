@@ -17,6 +17,8 @@ return new class extends Migration
             $table->decimal('total_price',12 , 2);
             $table->string('status')->default('pending');
             $table->string('address');
+            $table->string('phone');
+            $table->string('city');
             $table->timestamps();
         });
     }
