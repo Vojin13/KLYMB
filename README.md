@@ -21,11 +21,27 @@ cp .env.example .env
 
 # Generate the application encryption key
 php artisan key:generate
+
+# Create a symbolic link from public/storage to storage/app/public
+php artisan storage:link
 ```
 
-### 2. Environment Configuration (.env)
-After creating your `.env` file, you need to configure your local database settings. Open the file and update the following lines:
+### 2. Storage Link & Assets
+To properly display uploaded images for products and memberships, you must create a symbolic link.
 
+**Important Note:** If the `public/storage` folder already exists but images aren't showing, you might need to delete that folder manually before running the command. After linking, make sure to re-paste your product images into the storage folder if they were lost.
+
+```bash
+# Delete existing link (if broken) and create a new one
+php artisan storage:link
+
+### 2. Environment Configuration (.env)
+After creating your `.env` file, you need to configure
+your local database settings. Open the file and update the following lines:
+```
+
+### 3. Environment & Database Setup
+In your `.env` file, update the following lines to match your local development environment:
 ```bash
 # Database connection settings
 DB_CONNECTION=mysql
@@ -34,14 +50,6 @@ DB_PORT=3306
 DB_DATABASE=klymb
 DB_USERNAME=root
 DB_PASSWORD=
-```
-
-### 3. Application Key Generation
-The application key is used by Laravel to encrypt user sessions, passwords, and other sensitive gear data. If you haven't done it in the first step, run:
-
-```bash
-# Generate the unique application encryption key
-php artisan key:generate
 ```
 
 ### 4. Mail Configuration (Contact Form)
@@ -98,3 +106,10 @@ You can use these pre-defined accounts to log in and explore the KLYMB platform:
 
 ---
 
+### 7. Documentation
+Detailed technical documentation, including the project's logic and architecture, can be found in the `public` folder.
+
+```bash
+# Location of the documentation file
+public/documentation.pdf
+```
