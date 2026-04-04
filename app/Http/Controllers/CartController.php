@@ -111,7 +111,7 @@ class CartController extends Controller
         try {
             if ($cart) {
                 $cart->delete();
-                return redirect()->back()->with('success', 'Product removed from your gear.');
+                return redirect()->back()->with('success', 'Product removed from your cart.');
             }
 
             return redirect()->back()->with('error', 'Item not found in your cart.');
@@ -129,7 +129,7 @@ class CartController extends Controller
             foreach ($cartItems as $cartItem) {
                 $cartItem->delete();
             }
-            return back()->with('success', 'Item removed from your cart.');
+            return back()->with('success', 'Items removed from your cart.');
         }
         catch (\Exception $exception){
             Log::error($exception->getMessage());

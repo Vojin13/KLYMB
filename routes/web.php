@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActivityLogsController;
+use App\Http\Controllers\admin\AdminOrderController;
 use App\Http\Controllers\admin\AdminProductController;
 use App\Http\Controllers\admin\BadgesController;
 use App\Http\Controllers\admin\BrandController;
@@ -59,4 +60,5 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::resource('brands', BrandController::class)->except('show')->names('brands');
     Route::resource('badges', BadgesController::class)->except('show')->names('badges');
     Route::resource('logs', ActivityLogsController::class)->only(['index', 'show'])->names('logs');
+    Route::resource('orders',  AdminOrderController::class)->only(['index', 'show', 'update','destroy'])->names('orders');
 });

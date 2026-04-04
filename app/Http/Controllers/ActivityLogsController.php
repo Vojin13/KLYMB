@@ -11,9 +11,30 @@ class ActivityLogsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $logs = ActivityLog::with('user')->latest()->paginate(15);
+        $query = ActivityLog::with('user')->latest();
+
+        if ($request->filled('email')) {
+            $query->whereHas('user', function($q) use ($request) {
+                $q->where('email', 'like', '%' . $request->email . '%');
+            });
+        }
+
+        if ($request->filled('request_method')) {
+            $query->where('method', $request->request_method);
+        }
+
+        if ($request->filled('date_from')) {
+            $query->whereDate('created_at', '>=', $request->date_from);
+        }
+
+        if ($request->filled('date_to')) {
+            $query->whereDate('created_at', '<=', $request->date_to);
+        }
+
+        $logs = $query->paginate(15)->withQueryString();
+
         return view('admin.activity_logs.index', compact('logs'));
     }
 

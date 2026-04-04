@@ -85,11 +85,11 @@
 
                     <div class="flex gap-4 pt-4">
                         <div class="flex items-center border border-gray-200">
-                            <button class="px-4 py-2 hover:bg-gray-50">-</button>
-                            <input type="text" value="1" class="w-12 text-center font-bold border-none focus:ring-0">
-                            <button class="px-4 py-2 hover:bg-gray-50">+</button>
+                            <button class="px-4 py-2 hover:bg-gray-50" id="minusQuantity">-</button>
+                            <input type="text" value="1" name="quantity" id="quantity" class="w-12 text-center font-bold border-none focus:ring-0">
+                            <button class="px-4 py-2 hover:bg-gray-50" id="plusQuantity">+</button>
                         </div>
-                        <button class="flex-1 bg-red-600 hover:bg-black text-white font-black uppercase tracking-widest py-4 transition duration-300">
+                        <button id="add-to-cart" data-id="{{ $product->id }}" class="cursor-pointer flex-1 bg-red-600 hover:bg-black text-white font-black uppercase tracking-widest py-4 transition duration-300">
                             Add to Cart
                         </button>
                     </div>
@@ -129,33 +129,126 @@
 </main>
 
 <script>
-    /**
-     * Menja glavnu sliku sa Tailwind fade tranzicijom
-     */
     function changeImage(src, element) {
         const mainImage = document.getElementById('main-image');
 
-        // 1. Počni fade-out (Tailwind klasa)
         mainImage.classList.add('opacity-0');
 
-        // 2. Zameni izvor slike nakon što se slika sakrije (300ms)
         setTimeout(() => {
             mainImage.src = src;
-            // 3. Vrati opacity na 100
             mainImage.classList.remove('opacity-0');
         }, 300);
 
-        // 4. Update bordera na malim slikama
         document.querySelectorAll('.thumbnail-item').forEach(item => {
             item.classList.remove('border-red-600');
             item.classList.add('border-transparent');
             item.querySelector('img').classList.replace('opacity-100', 'opacity-70');
         });
 
-        // Istakni kliknutu sliku
         element.classList.remove('border-transparent');
         element.classList.add('border-red-600');
         element.querySelector('img').classList.replace('opacity-70', 'opacity-100');
     }
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const quantityInput = document.getElementById('quantity');
+            const plusBtn = document.getElementById('plusQuantity');
+            const minusBtn = document.getElementById('minusQuantity');
+
+            plusBtn.addEventListener('click', function() {
+                let currentValue = parseInt(quantityInput.value) || 1;
+                quantityInput.value = currentValue + 1;
+            });
+
+            minusBtn.addEventListener('click', function() {
+                let currentValue = parseInt(quantityInput.value) || 1;
+                if (currentValue > 1) {
+                    quantityInput.value = currentValue - 1;
+                }
+            });
+
+            quantityInput.addEventListener('blur', function() {
+                let val = parseInt(this.value);
+
+                if ((isNaN(val) || val < 1) || val > 99) {
+                    this.value = 1;
+                } else {
+                    this.value = Math.floor(val);
+                }
+            });
+
+            const addToCart = document.querySelector('#add-to-cart')
+
+            addToCart.addEventListener('click', function(e) {
+                const productId = addToCart.getAttribute('data-id');
+                const quantityInput = document.getElementById('quantity');
+                const quantity = quantityInput ? quantityInput.value : 1;
+                const originalContent = addToCart.innerHTML;
+
+                addToCart.disabled = true;
+                const spinner = `<svg class="animate-spin h-4 w-4 mr-2 border-2 border-white border-t-transparent rounded-full inline-block" viewBox="0 0 24 24"></svg>`;
+                addToCart.innerHTML = spinner + " ADDING...";
+
+                $.ajax({
+                    url: "{{ route('cart.store') }}",
+                    method: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        product_id: productId,
+                        quantity: quantity
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.success) {
+                            const cartCounter = document.getElementById('cart-count');
+                            if (cartCounter && data.cartCount !== undefined) {
+                                cartCounter.innerText = data.cartCount;
+                                cartCounter.classList.add('scale-125');
+                                setTimeout(() => cartCounter.classList.remove('scale-125'), 200);
+                            }
+
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 2500,
+                                timerProgressBar: true,
+                                background: '#000',
+                                color: '#fff',
+                                iconColor: '#ef4444',
+                            });
+
+                            Toast.fire({
+                                icon: 'success',
+                                title: 'GEAR ADDED TO PACK'
+                            });
+                        }
+                    },
+                    error: function (xhr) {
+                        if (xhr.status === 401 || xhr.status === 403) {
+                            Swal.fire({
+                                title: 'LOGIN REQUIRED',
+                                text: 'You must be logged in to add gear to your cart.',
+                                icon: 'warning',
+                                confirmButtonColor: '#000',
+                                background: '#fff',
+                                confirmButtonText: 'SIGN IN'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "{{ route('auth.login') }}";
+                                }
+                            });
+                        } else {
+                            console.error('AJAX Error:', xhr.responseText);
+                        }
+                    },
+                    complete: function () {
+                        addToCart.disabled = false;
+                        addToCart.innerHTML = originalContent;
+                    }
+                });
+            })
+        })
 </script>
 @endsection

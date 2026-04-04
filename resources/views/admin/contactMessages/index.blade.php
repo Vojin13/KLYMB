@@ -21,6 +21,55 @@
             </div>
         @endif
 
+        <div class="mb-8 bg-white border border-gray-200 p-6 rounded-sm">
+            <form action="{{ route('admin.messages.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-5 gap-6">
+                <div>
+                    <label class="block text-xs font-black uppercase tracking-widest mb-2 text-gray-500">Search Email</label>
+                    <input type="text"
+                           name="email"
+                           value="{{ request('email') }}"
+                           placeholder="Enter email..."
+                           class="w-full border-2 border-gray-200 focus:border-black p-3 text-sm outline-none transition font-bold">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-black uppercase tracking-widest mb-2 text-gray-500">Status</label>
+                    <select name="status" class="w-full border-2 border-gray-200 focus:border-black p-3 text-sm outline-none transition font-bold uppercase">
+                        <option value="">All Messages</option>
+                        <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Answered</option>
+                        <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Pending</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-black uppercase tracking-widest mb-2 text-gray-500">Date From</label>
+                    <input type="date"
+                           name="date_from"
+                           value="{{ request('date_from') }}"
+                           class="w-full border-2 border-gray-200 focus:border-black p-3 text-sm outline-none transition font-bold">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-black uppercase tracking-widest mb-2 text-gray-500">Date To</label>
+                    <input type="date"
+                           name="date_to"
+                           value="{{ request('date_to') }}"
+                           class="w-full border-2 border-gray-200 focus:border-black p-3 text-sm outline-none transition font-bold">
+                </div>
+
+                <div class="flex items-end gap-2">
+                    <button type="submit"
+                            class="flex-1 cursor-pointer bg-black text-white border-2 border-black px-4 py-3 font-black uppercase tracking-widest hover:bg-red-600 transition text-xs text-center">
+                        Filter
+                    </button>
+                    <a href="{{ route('admin.messages.index') }}"
+                       class="flex-1 bg-gray-100 text-black border-2 border-black px-4 py-3 font-black uppercase tracking-widest hover:bg-black hover:text-white transition text-xs text-center">
+                        Reset
+                    </a>
+                </div>
+            </form>
+        </div>
+
         <div class="flex justify-start mb-4">
             <p class="text-gray-500 font-bold text-sm uppercase tracking-widest">
                 Showing

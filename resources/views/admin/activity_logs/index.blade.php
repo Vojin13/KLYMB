@@ -23,6 +23,56 @@
             </p>
         </div>
 
+        <div class="mb-8 bg-white border border-gray-200 p-6 rounded-sm">
+            <form action="{{ route('admin.logs.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-5 gap-6">
+                <div>
+                    <label class="block text-xs font-black uppercase tracking-widest mb-2 text-gray-500">Search User Email</label>
+                    <input type="text"
+                           name="email"
+                           value="{{ request('email') }}"
+                           placeholder="user@example.com"
+                           class="w-full border-2 border-gray-200 focus:border-black p-3 text-sm outline-none transition font-bold">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-black uppercase tracking-widest mb-2 text-gray-500">HTTP Method</label>
+                    <select name="request_method" class="w-full border-2 border-gray-200 focus:border-black p-3 text-sm outline-none transition font-bold uppercase">
+                        <option value="">All Methods</option>
+                        @foreach(['GET', 'POST', 'PUT', 'PATCH', 'DELETE'] as $m)
+                            <option value="{{ $m }}" {{ request('method') == $m ? 'selected' : '' }}>{{ $m }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-black uppercase tracking-widest mb-2 text-gray-500">Date From</label>
+                    <input type="date"
+                           name="date_from"
+                           value="{{ request('date_from') }}"
+                           class="w-full border-2 border-gray-200 focus:border-black p-3 text-sm outline-none transition font-bold">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-black uppercase tracking-widest mb-2 text-gray-500">Date To</label>
+                    <input type="date"
+                           name="date_to"
+                           value="{{ request('date_to') }}"
+                           class="w-full border-2 border-gray-200 focus:border-black p-3 text-sm outline-none transition font-bold">
+                </div>
+
+                <div class="flex items-end gap-2">
+                    <button type="submit"
+                            class="flex-1 cursor-pointer bg-black text-white border-2 border-black px-4 py-3 font-black uppercase tracking-widest hover:bg-red-600 transition text-xs text-center">
+                        Filter
+                    </button>
+                    <a href="{{ route('admin.logs.index') }}"
+                       class="flex-1 bg-gray-100 text-black border-2 border-black px-4 py-3 font-black uppercase tracking-widest hover:bg-black hover:text-white transition text-xs text-center">
+                        Reset
+                    </a>
+                </div>
+            </form>
+        </div>
+
         <div class="bg-white border border-gray-200 shadow-sm overflow-hidden rounded-sm">
             <table class="w-full text-left">
                 <thead>

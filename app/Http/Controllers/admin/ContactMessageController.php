@@ -11,12 +11,35 @@ class ContactMessageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $contactMessages = ContactMessage::query()
-            ->orderBy('is_answered')
+        $query = ContactMessage::query()->with('user');
+
+        if($request->filled('email')) {
+            $keyword = $request->email;
+
+            $query->where('email', 'LIKE', "%{$keyword}%")
+            ->orWhereHas('user', function($userQuery) use ($keyword) {
+                    $userQuery->where('email', 'LIKE', "%{$keyword}%");
+                });
+        }
+
+        if ($request->filled('date_from')) {
+            $query->whereDate('created_at', '>=', $request->date_from);
+        }
+
+        if ($request->filled('date_to')) {
+            $query->whereDate('created_at', '<=', $request->date_to);
+        }
+
+        if ($request->filled('status')) {
+            $query->where('is_answered' , '=', $request->status);
+        }
+
+        $contactMessages = $query->orderBy('is_answered', 'asc')
             ->orderBy('updated_at', 'desc')
-            ->paginate(15);
+            ->paginate(15)
+            ->withQueryString();
 
         return view('admin.contactMessages.index', ['messages' => $contactMessages]);
     }

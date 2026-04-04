@@ -3,6 +3,27 @@
 @section('title', 'Your Cart | KLYMB')
 
 @section('content')
+    <div class="fixed top-24 right-6 z-[100] space-y-3 min-w-[300px] pointer-events-none">
+        @if(session('success'))
+            <div class="pointer-events-auto bg-black text-white p-5 border-l-8 border-green-500 shadow-2xl flex justify-between items-center animate-slide-in">
+                <span class="font-black tracking-widest text-[10px] uppercase">{{ session('success') }}</span>
+                <button onclick="this.parentElement.remove()" class="ml-4 font-black text-xs hover:text-red-600 transition-colors uppercase">X</button>
+            </div>
+        @endif
+
+        @if(session('error') || $errors->any())
+            <div class="pointer-events-auto bg-black text-white p-5 border-l-8 border-red-600 shadow-2xl flex justify-between items-center animate-slide-in">
+                <div class="flex flex-col">
+                    <span class="font-black tracking-widest text-[10px] uppercase text-red-600 mb-1">Error Detected</span>
+                    <span class="font-bold text-[10px] uppercase tracking-tight text-gray-300">
+                        {{ session('error') }}
+                    </span>
+                </div>
+                <button onclick="this.parentElement.remove()" class="ml-4 font-black text-xs hover:text-red-600 transition-colors uppercase">X</button>
+            </div>
+        @endif
+    </div>
+
     <main class="bg-gray-50 antialiased min-h-screen pb-24">
         <section class="relative bg-white border-b border-gray-100 py-16 overflow-hidden">
             @if ($errors->any())
