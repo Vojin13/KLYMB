@@ -94,6 +94,7 @@ class AuthController extends Controller
         catch (\Exception $e)
         {
             Log::error($e->getMessage());
+            return redirect()->route('show.login')->with('error', 'Something went wrong.');
         }
     }
 }
