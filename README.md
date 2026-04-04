@@ -1,4 +1,4 @@
-# 🧗‍♂️ KLYMB — Vertical Equipment & Adventure Platform
+# KLYMB
 
 Welcome to **KLYMB**, a comprehensive gym management platform. This application is designed to handle everything a climbing gym needs: from managing high-quality pro-shop products and diverse membership plans to a robust administrative backend for full facility control.
 
