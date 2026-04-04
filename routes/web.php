@@ -25,6 +25,7 @@ Route::view('/membership', 'pages.membership')->name('memberships.index');
 Route::resource('/products', ProductController::class)->only(['index', 'show'])->names('products');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+Route::get('/verify/{code}', [AuthController::class, 'verify'])->name('verify.account');
 
 // samo za neulogovane korisnike
 Route::group(['middleware' => 'guest'], function () {

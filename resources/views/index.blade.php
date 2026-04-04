@@ -4,6 +4,18 @@
 
 @section('content')
 <main>
+    @if(session('success'))
+        <div class="bg-green-600 text-white text-center py-4 font-black uppercase tracking-widest animate-pulse">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="bg-red-600 text-white text-center py-4 font-black uppercase tracking-widest">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <section class="relative h-[91vh] flex items-center bg-cover bg-center"
              style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ asset('assets/img/Hero.png') }}')">
 
