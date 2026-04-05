@@ -6,6 +6,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class EditUserController extends Controller
 {
@@ -21,7 +22,7 @@ class EditUserController extends Controller
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
 
-            $fileName = time() . '_'. uuid_create() . $file->getClientOriginalName();
+            $fileName = time() . '_'. Str::uuid() . $file->getClientOriginalName();
             $path = $file->storeAs('avatars', $fileName, 'public');
             $extension = $file->getClientOriginalExtension();
             $size = $file->getSize();
@@ -36,12 +37,13 @@ class EditUserController extends Controller
             ]);
         }
 
-        if(!empty($request->has('password'))){
-            $data['password'] = Hash::make($data['password']);
-        }
-        else {
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        } else {
             unset($data['password']);
         }
+
+        unset($data['avatar']);
         $user->update($data);
 
         return redirect()->back()->with('success', 'Profile updated successfully.');
