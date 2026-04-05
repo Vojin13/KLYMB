@@ -70,7 +70,7 @@
                             <a href="{{ route('user.edit', auth()->user()) }}" class="block px-4 py-2 hover:bg-gray-100 cursor-pointer">Edit Profile</a>
                         </li>
                         <li>
-                            <a href="{{ route('user.edit', auth()->user()) }}" class="block px-4 py-2 hover:bg-gray-100 cursor-pointer">My orders</a>
+                            <a href="{{ route('orders.index') }}" class="block px-4 py-2 hover:bg-gray-100 cursor-pointer">My orders</a>
                         </li>
                     </ul>
                     <div class="py-1">

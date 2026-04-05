@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\CategoriesController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\EditUserController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -43,6 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
     Route::resource('/cart', CartController::class)->names('cart');
     Route::resource('/checkout', CheckoutController::class)->only('index','store')->names('checkout');
+    Route::resource('/orders', OrderController::class)->only('index','show')->names('orders');
 });
 
 // za member ulogu
