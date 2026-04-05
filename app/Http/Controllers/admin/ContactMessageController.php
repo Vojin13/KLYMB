@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ContactAnswerMail;
 use App\Models\ContactMessage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactMessageController extends Controller
 {
@@ -107,6 +109,8 @@ class ContactMessageController extends Controller
         $cm->answer = $data['answer'];
         $cm->is_answered = true;
         $cm->save();
+
+        Mail::to($email)->send(new ContactAnswerMail($cm, $data['answer']));
 
         return redirect()->route('admin.messages.index')->with('message', 'Message '. $info .' updated successfully');
 

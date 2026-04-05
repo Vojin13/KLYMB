@@ -34,10 +34,6 @@ To properly display uploaded images for products and memberships, you must creat
 ```bash
 # Delete existing link (if broken) and create a new one
 php artisan storage:link
-
-### 2. Environment Configuration (.env)
-After creating your `.env` file, you need to configure
-your local database settings. Open the file and update the following lines:
 ```
 
 ### 3. Environment & Database Setup
