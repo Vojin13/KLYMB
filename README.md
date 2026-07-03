@@ -1,6 +1,22 @@
 # KLYMB
 
-Welcome to **KLYMB**, a comprehensive gym management platform. This application is designed to handle everything a climbing gym needs: from managing high-quality pro-shop products and diverse membership plans to a robust administrative backend for full facility control.
+**KLYMB** is a Laravel 12 web application built as an online pro-shop for a climbing gym, paired with a full administrative backend. Visitors can browse and filter climbing gear, register and log in, manage a shopping cart, check out, and track their order history. A static membership info page is also included, though membership plans/subscriptions are not yet functionally implemented (the routes are scaffolded for future work).
+
+## ✨ Features
+
+- **Shop** — product catalog with filtering by category, brand, and price range, plus sorting options
+- **Cart & Checkout** — add/update/remove cart items, checkout with shipping details, order creation
+- **Order history** — authenticated users can view their past orders
+- **Custom authentication** — registration, login, logout, and email-based account verification (activation code sent via email)
+- **Roles** — `user`, `member`, `admin`, enforced via route middleware (the `member` role currently has no dedicated features)
+- **Admin panel** — dashboard with stats, product/category/brand/badge management (with image uploads), user management (search, filter, ban/unban), order management, contact message inbox with email replies, and an activity log audit trail
+- **Contact form** — public/authenticated contact form with admin reply-by-email functionality
+
+## 🧱 Tech Stack
+
+- **Backend**: Laravel 12, PHP ^8.2
+- **Frontend**: Blade, Tailwind CSS 4, Flowbite, Vite
+- **Database**: MySQL (configurable via `.env`; SQLite is the default in `.env.example`)
 
 ---
 
